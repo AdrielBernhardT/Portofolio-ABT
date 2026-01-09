@@ -1,7 +1,7 @@
 "use client";
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -17,7 +17,7 @@ const Navbar = () => {
           }
         });
       },
-      { threshold: 0.5 } 
+      { threshold: 0.5 }
     );
 
     navLinks.forEach((item) => {
@@ -30,7 +30,10 @@ const Navbar = () => {
   }, [navLinks]);
 
   // --- FUNGSI BARU UNTUK HANDLE CLICK ---
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    id: string
+  ) => {
     // 1. Mencegah perilaku default loncat langsung (jump)
     e.preventDefault();
 
@@ -39,7 +42,7 @@ const Navbar = () => {
 
     // 3. Scroll ke elemen tersebut dengan smooth
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -57,13 +60,13 @@ const Navbar = () => {
 
             return (
               <li key={item}>
-                <Link 
+                <Link
                   href={`#${id}`}
                   scroll={false} // Next.js scroll dimatikan
                   onClick={(e) => handleScroll(e, id)} // Kita handle scroll sendiri di sini
                   className={`transition duration-300 pb-1 ${
-                    isActive 
-                      ? "text-white border-b-2 border-blue-500" 
+                    isActive
+                      ? "text-white border-b-2 border-blue-500"
                       : "text-gray-500 hover:text-white"
                   }`}
                 >
@@ -74,9 +77,7 @@ const Navbar = () => {
           })}
         </ul>
 
-        <button className="md:hidden text-white absolute right-6">
-          ☰
-        </button>
+        <button className="md:hidden text-white absolute right-6">☰</button>
       </div>
     </nav>
   );
