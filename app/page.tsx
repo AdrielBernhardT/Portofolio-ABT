@@ -5,12 +5,11 @@ import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 
 export default function Home() {
-  
   // --- Fungsi untuk Scroll ke Contact ---
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById("contact");
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -43,7 +42,7 @@ export default function Home() {
 
           <div className="pt-6">
             {/* BUTTON UPDATE: Menambahkan onClick dan memperbaiki class rounded */}
-            <button 
+            <button
               onClick={scrollToContact}
               className="border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-bold"
             >
@@ -316,7 +315,7 @@ export default function Home() {
                   <div className="w-full h-full flex items-center justify-center">
                     <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <span className="text-gray-600 font-bold text-4xl group-hover:scale-110 transition-transform duration-300">
-                        {project.title.charAt(0)}
+                      {project.title.charAt(0)}
                     </span>
                   </div>
                 )}
@@ -434,7 +433,7 @@ export default function Home() {
         className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         {/* Judul Section */}
-        <div className="mb-16 text-center md:text-left">
+        <div className="mb-3 text-center md:text-left">
           <h2 className="text-4xl font-bold text-white mb-2">
             Contact <span className="text-blue-500">Me</span>
           </h2>
