@@ -1,8 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 
 export default function Home() {
+  
+  // --- Fungsi untuk Scroll ke Contact ---
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <main className="w-full bg-black text-white">
       {/* ================= HOME SECTION ================= */}
@@ -21,7 +32,7 @@ export default function Home() {
             </span>
           </h1>
 
-          <div className="w-24 h-1 bg-gray-700 my-6 blue-500-full mx-auto md:mx-0"></div>
+          <div className="w-24 h-1 bg-gray-700 my-6 rounded-full mx-auto md:mx-0"></div>
 
           <p className="max-w-lg text-gray-400 text-lg">
             Computer Science Student at BINUS Online coloboration with Bank
@@ -31,13 +42,17 @@ export default function Home() {
           </p>
 
           <div className="pt-6">
-            <button className="border border-white px-8 py-3 blue-500-full hover:bg-white hover:text-black transition duration-300 font-bold">
+            {/* BUTTON UPDATE: Menambahkan onClick dan memperbaiki class rounded */}
+            <button 
+              onClick={scrollToContact}
+              className="border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-bold"
+            >
               CONTACT ME
             </button>
           </div>
         </div>
 
-        <div className="relative w-64 h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 blue-500-2xl overflow-hidden">
+        <div className="relative w-64 h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden">
           <Image
             src={mainImage}
             alt="Profile Image Adriel"
@@ -88,7 +103,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-[#111] p-6 blue-500-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
               <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
                 04+
               </h3>
@@ -97,7 +112,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#111] p-6 blue-500-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
               <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
                 05+
               </h3>
@@ -106,7 +121,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#111] p-6 blue-500-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
               <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
                 20+
               </h3>
@@ -115,7 +130,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-[#111] p-6 blue-500-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
               <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
                 24/7
               </h3>
@@ -227,18 +242,17 @@ export default function Home() {
           ].map((category, index) => (
             <div
               key={index}
-              className="bg-[#111] p-8 blue-500-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group h-full"
+              className="bg-[#111] p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group h-full"
             >
               <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
                 {category.title}
               </h3>
 
-              {/* Container Tags: Kembali normal (wrap) tanpa scroll */}
               <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 bg-gray-900 border border-gray-700 blue-500-full text-sm text-gray-300 group-hover:border-blue-500/50 transition"
+                    className="px-4 py-2 bg-gray-900 border border-gray-700 rounded-full text-sm text-gray-300 group-hover:border-blue-500/50 transition"
                   >
                     {skill}
                   </span>
@@ -299,12 +313,13 @@ export default function Home() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 ) : (
-                  <span className="text-gray-600 font-bold text-4xl group-hover:scale-110 transition-transform duration-300">
-                    {project.title.charAt(0)}
-                  </span>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="text-gray-600 font-bold text-4xl group-hover:scale-110 transition-transform duration-300">
+                        {project.title.charAt(0)}
+                    </span>
+                  </div>
                 )}
-
-                <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-colors duration-300"></div>
 
                 <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-blue-400 border border-blue-500/30 z-10">
                   {project.type}
