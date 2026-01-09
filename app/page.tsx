@@ -433,7 +433,7 @@ export default function Home() {
         className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         {/* Judul Section */}
-        <div className="mb-3 text-center md:text-left">
+        <div className="mb-5 text-center md:text-left">
           <h2 className="text-4xl font-bold text-white mb-2">
             Contact <span className="text-blue-500">Me</span>
           </h2>
