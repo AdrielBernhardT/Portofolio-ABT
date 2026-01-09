@@ -1,4 +1,6 @@
 import Image from "next/image";
+import mainImage from "./images/main-image.png";
+import project1 from "./images/project-1.png";
 
 export default function Home() {
   return (
@@ -37,7 +39,7 @@ export default function Home() {
 
         <div className="relative w-64 h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 blue-500-2xl overflow-hidden">
           <Image
-            src="/main-image.png"
+            src={mainImage}
             alt="Profile Image Adriel"
             fill
             className="object-cover object-top origin-top scale-125"
@@ -262,7 +264,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              backgroundImage: "/project-1.png",
+              backgroundImage: project1,
               title: "EduTIA",
               desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We offer courses specifically designed to meet the demands of the local job market. Beyond training, we connect graduates directly with corporate partners to help them secure roles that match their specialties.",
               tech: ["Next.js", "PostgreSQL", "Prisma"],
