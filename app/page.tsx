@@ -173,12 +173,17 @@ export default function Home() {
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
           {/* Hint untuk mobile user */}
-          <p className="text-gray-500 text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest">
-            ← SWIPE TO SEE MORE →
+          <p className="text-gray-500 text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
+            ← Swipe Left/Right to Explore →
           </p>
         </div>
 
-        <div className="flex items-stretch overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
+        {/* CONTAINER BARU:
+          - Mobile: Menggunakan Grid dengan 'grid-flow-col' dan 'grid-rows-2' 
+            untuk memaksa card mengisi ke samping dalam 2 baris.
+          - Desktop: Kembali ke Grid standar (3 kolom).
+        */}
+        <div className="grid grid-flow-col grid-rows-2 overflow-x-auto pb-10 gap-4 sm:gap-6 snap-x snap-mandatory no-scrollbar md:grid-flow-row md:grid-rows-none md:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
           {[
             {
               title: "Backend & Languages",
@@ -186,30 +191,30 @@ export default function Home() {
             },
             {
               title: "Cyber Security",
-              skills: ["Linux (Kali)", "Network Analysis", "Wireshark", "Penetration Testing", "Burp Suite", "Cryptography", "Metasploit", "Nmap"],
+              skills: ["Linux (Kali)", "Network Analysis", "Wireshark", "Pentesting", "Burp Suite", "Nmap"],
             },
             {
               title: "Data & ML",
-              skills: ["Pandas", "Scikit-Learn", "Data Visualization", "Jupyter", "NumPy", "Matplotlib", "BioPython", "Seaborn", "TensorFlow", "Regression"],
+              skills: ["Pandas", "Scikit-Learn", "Jupyter", "NumPy", "TensorFlow", "Regression"],
             },
             {
               title: "Web Dev",
-              skills: ["Next.js", "Tailwind CSS", "HTML5/CSS3", "React", "TypeScript", "REST API"],
+              skills: ["Next.js", "Tailwind CSS", "React", "TypeScript", "REST API"],
             },
             {
               title: "Tools & DevOps",
-              skills: ["Git & GitHub", "Docker", "Linux (Ubuntu)", "VS Code", "Figma", "Postman", "Vim"],
+              skills: ["Git & GitHub", "Docker", "Linux (Ubuntu)", "VS Code", "Postman", "Vim"],
             },
             {
               title: "Soft Skills",
-              skills: ["Problem Solving", "Teamwork", "Adaptability", "Critical Thinking", "English", "Public Speaking"],
+              skills: ["Problem Solving", "Teamwork", "Adaptability", "Public Speaking"],
             },
           ].map((category, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[60%] md:min-w-0 snap-center bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] group flex flex-col"
+              className="min-w-[280px] sm:min-w-[350px] md:min-w-0 snap-start bg-[#111] p-5 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col h-full shadow-lg"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
+              <h3 className="text-lg md:text-2xl font-bold text-white mb-4 group-hover:text-blue-500 transition-colors">
                 {category.title}
               </h3>
 
@@ -217,7 +222,7 @@ export default function Home() {
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[11px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300 whitespace-nowrap"
+                    className="px-2.5 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[10px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300"
                   >
                     {skill}
                   </span>
