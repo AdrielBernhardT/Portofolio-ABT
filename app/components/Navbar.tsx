@@ -9,12 +9,12 @@ const Navbar = () => {
 
   const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
 
-  // --- FUNGSI SCROLL UNTUK TOMBOL CONTACT ME DI MENU MOBILE ---
+  // Menangani error "Cannot find name 'scrollToContact'"
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false); // Tutup menu setelah scroll
+      setIsMobileMenuOpen(false); // Menutup menu setelah scroll
     }
   };
 
@@ -49,13 +49,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-[100] bg-black/50 backdrop-blur-lg border-b border-white/10">
-      <div className="w-full flex justify-between items-center px-6 py-5 max-w-7xl mx-auto relative">
+    // Penambahan bg-black dan z-index tinggi agar tidak menumpuk dengan konten
+    <nav className="fixed top-0 w-full z-[100] bg-black border-b border-white/10">
+      <div className="w-full flex justify-between items-center px-6 py-4 max-w-7xl mx-auto relative">
         {/* Logo */}
-        <div className="text-2xl font-black tracking-tighter text-white">ADRIEL</div>
+        <div className="text-xl font-black tracking-tighter text-white">ADRIEL</div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
+        {/* Desktop Menu - Ukuran teks diperkecil (text-xs) */}
+        <ul className="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-widest">
           {navLinks.map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
             const isActive = activeSection === id;
@@ -75,9 +76,12 @@ const Navbar = () => {
           })}
         </ul>
 
-        {/* Burger Button */}
-        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white z-[130]">
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {/* Tombol Burger */}
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+          className="md:hidden text-white z-[130] p-2"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -87,11 +91,11 @@ const Navbar = () => {
         </button>
 
         {/* --- MOBILE MENU OVERLAY --- */}
-        <div className={`fixed inset-0 bg-black/98 z-[120] flex flex-col transition-all duration-500 md:hidden ${
+        {/* Menggunakan bg-black pekat dan padding yang lebih rapi */}
+        <div className={`fixed inset-0 bg-black z-[120] flex flex-col transition-all duration-500 md:hidden ${
           isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}>
-          {/* Navigasi List */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-10">
+          <div className="flex flex-col items-center justify-center h-full gap-8">
             {navLinks.map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
               const isActive = activeSection === id;
@@ -100,8 +104,9 @@ const Navbar = () => {
                   key={item}
                   href={`#${id}`}
                   onClick={(e) => handleScroll(e, id)}
-                  className={`text-3xl font-bold uppercase tracking-[0.2em] transition-all ${
-                    isActive ? "text-blue-500 scale-110" : "text-white/70"
+                  // Ukuran teks mobile diperkecil menjadi text-xl
+                  className={`text-xl font-bold uppercase tracking-[0.2em] transition-all ${
+                    isActive ? "text-blue-500 scale-105" : "text-white/70"
                   }`}
                 >
                   {item}
@@ -111,7 +116,7 @@ const Navbar = () => {
             
             <button 
               onClick={scrollToContact}
-              className="mt-4 px-8 py-3 bg-blue-600 text-white rounded-full font-bold uppercase text-sm tracking-wider"
+              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full font-bold uppercase text-xs tracking-wider transition-transform active:scale-95"
             >
               Contact Me
             </button>
