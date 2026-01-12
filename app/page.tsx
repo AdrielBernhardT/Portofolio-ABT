@@ -139,16 +139,16 @@ export default function Home() {
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
           {/* Hint untuk mobile user */}
-          <p className="text-gray-500 text-xs mt-4 md:hidden animate-pulse">
-            ← Swipe to see more →
+          <p className="text-gray-500 text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest">
+            ← SWIPE TO SEE MORE →
           </p>
         </div>
 
-        {/* Wrapper untuk Scroll: 
-            Mobile: Flexbox horizontal scroll
-            Desktop: Grid layout
+        {/* PENTING: 
+            - Tambahkan 'items-stretch' agar semua anak (card) punya tinggi sama.
+            - Di mobile, 'flex' secara default akan membuat semua anak setinggi container-nya.
         */}
-        <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
+        <div className="flex items-stretch overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
           {[
             {
               title: "Backend & Languages",
@@ -177,17 +177,18 @@ export default function Home() {
           ].map((category, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[60%] md:min-w-0 snap-center bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] group flex flex-col h-full"
+              className="min-w-[85%] sm:min-w-[60%] md:min-w-0 snap-center bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] group flex flex-col"
             >
               <h3 className="text-xl md:text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
                 {category.title}
               </h3>
 
-              <div className="flex flex-wrap gap-2 md:gap-3">
+              {/* 'flex-1' di sini memastikan container skill mengambil sisa ruang yang ada */}
+              <div className="flex flex-wrap gap-2 md:gap-3 content-start flex-1">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[12px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300"
+                    className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[11px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300 whitespace-nowrap"
                   >
                     {skill}
                   </span>
