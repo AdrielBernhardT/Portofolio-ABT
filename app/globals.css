@@ -4,13 +4,17 @@
 
 @layer base {
   html {
-    /* Smooth scroll dan Snap tetap ada */
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
     scroll-behavior: smooth;
 
-    /* Sembunyikan scrollbar global */
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-snap-type: y mandatory;
+    }
   }
 
   html::-webkit-scrollbar {
@@ -22,7 +26,6 @@
   }
 }
 
-/* Tambahkan ini di bagian bawah globals.css */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;

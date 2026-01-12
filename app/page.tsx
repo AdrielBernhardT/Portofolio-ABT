@@ -52,7 +52,7 @@ export default function Home() {
       {/* ================= HOME SECTION ================= */}
       <section
         id="home"
-        className="min-h-screen w-full snap-center flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-6 py-20 lg:py-0 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-center flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-6 py-20 lg:py-0 max-w-7xl mx-auto"
       >
         <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-[400px] lg:w-[450px] lg:h-[550px] order-1 lg:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
           <Image
@@ -100,7 +100,7 @@ export default function Home() {
       {/* ================= ABOUT SECTION ================= */}
       <section
         id="about"
-        className="min-h-screen w-full snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         {/* Header Section */}
         <div className="mb-10 lg:mb-16 text-center md:text-left">
@@ -165,7 +165,7 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
@@ -231,7 +231,7 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
@@ -331,8 +331,12 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       {/* ================= CONTACT SECTION ================= */}
-      <section id="contact" className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto">
+      <section 
+        id="contact" 
+        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+      >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Contact <span className="text-blue-500">Me</span></h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
