@@ -131,114 +131,63 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="min-h-screen w-full snap-start flex flex-col py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-3 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-white mb-2">
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             My <span className="text-blue-500">Skills</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          {/* Hint untuk mobile user */}
+          <p className="text-gray-500 text-xs mt-4 md:hidden animate-pulse">
+            ← Swipe to see more →
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Wrapper untuk Scroll: 
+            Mobile: Flexbox horizontal scroll
+            Desktop: Grid layout
+        */}
+        <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
           {[
             {
               title: "Backend & Languages",
-              skills: [
-                "Python",
-                "Java",
-                "C",
-                "C++",
-                "SQL",
-                "Go",
-                "Node.js",
-                "PHP",
-              ],
+              skills: ["Python", "Java", "C", "C++", "SQL", "Go", "Node.js", "PHP"],
             },
             {
               title: "Cyber Security",
-              skills: [
-                "Linux (Kali)",
-                "Network Analysis",
-                "Wireshark",
-                "Penetration Testing",
-                "Burp Suite",
-                "Cryptography",
-                "Metasploit",
-                "Nmap",
-              ],
+              skills: ["Linux (Kali)", "Network Analysis", "Wireshark", "Penetration Testing", "Burp Suite", "Cryptography", "Metasploit", "Nmap"],
             },
             {
               title: "Data & ML",
-              skills: [
-                "Pandas",
-                "Scikit-Learn",
-                "Data Visualization",
-                "Jupyter",
-                "NumPy",
-                "Matplotlib",
-                "BioPython",
-                "Seaborn",
-                "TensorFlow",
-                "Pyplotlib",
-                "Regression",
-                "Random Forest",
-              ],
+              skills: ["Pandas", "Scikit-Learn", "Data Visualization", "Jupyter", "NumPy", "Matplotlib", "BioPython", "Seaborn", "TensorFlow", "Regression"],
             },
             {
               title: "Web Dev",
-              skills: [
-                "Next.js",
-                "Tailwind CSS",
-                "HTML5/CSS3",
-                "React",
-                "TypeScript",
-                "REST API",
-              ],
+              skills: ["Next.js", "Tailwind CSS", "HTML5/CSS3", "React", "TypeScript", "REST API"],
             },
             {
               title: "Tools & DevOps",
-              skills: [
-                "Git & GitHub",
-                "Docker",
-                "Linux (Ubuntu)",
-                "VS Code",
-                "Figma",
-                "Postman",
-                "Vim",
-              ],
+              skills: ["Git & GitHub", "Docker", "Linux (Ubuntu)", "VS Code", "Figma", "Postman", "Vim"],
             },
             {
               title: "Soft Skills",
-              skills: [
-                "Problem Solving",
-                "Teamwork",
-                "Adaptability",
-                "Critical Thinking",
-                "English",
-                "Project Management",
-                "Public Speaking",
-                "Time Management",
-                "Marketing",
-                "Photography",
-                "Sport",
-                "Music",
-              ],
+              skills: ["Problem Solving", "Teamwork", "Adaptability", "Critical Thinking", "English", "Public Speaking"],
             },
           ].map((category, index) => (
             <div
               key={index}
-              className="bg-[#111] p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group h-full"
+              className="min-w-[85%] sm:min-w-[60%] md:min-w-0 snap-center bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] group flex flex-col h-full"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
                 {category.title}
               </h3>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 bg-gray-900 border border-gray-700 rounded-full text-sm text-gray-300 group-hover:border-blue-500/50 transition"
+                    className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[12px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300"
                   >
                     {skill}
                   </span>

@@ -4,9 +4,11 @@
 
 @layer base {
   html {
+    /* Smooth scroll dan Snap tetap ada */
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 
+    /* Sembunyikan scrollbar global */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -16,7 +18,17 @@
   }
 
   body {
-    background-color: black;
-    color: white;
+    @apply bg-black text-white;
+  }
+}
+
+/* Tambahkan ini di bagian bawah globals.css */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
