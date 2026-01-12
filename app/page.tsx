@@ -66,79 +66,64 @@ export default function Home() {
       {/* ================= ABOUT SECTION ================= */}
       <section
         id="about"
-        className="h-screen w-full snap-center flex flex-col justify-center py-10 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold text-white mb-2">
+        {/* Header Section */}
+        <div className="mb-10 lg:mb-16 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             About <span className="text-blue-500">Me</span>
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full"></div>
+          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-gray-400 leading-relaxed text-lg">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Text Content */}
+          <div className="space-y-5 text-gray-400 leading-relaxed text-base md:text-lg order-2 lg:order-1">
             <p>
               Hi! I'm{" "}
               <span className="text-white font-semibold">
                 Adriel Bernhard Tanuhariono
               </span>
-              , a 4th-semester Computer Science student at BINUS Online Learning
-              based in{" "}
-              <span className="text-white">Sentul, West Java, Indonesia</span>.
+              , a 4th-semester Computer Science student at{" "}
+              <span className="text-blue-400">BINUS Online</span> based in{" "}
+              <span className="text-white">Sentul, West Java</span>.
             </p>
             <p>
               I am currently part of the prestigious{" "}
-              <span className="text-white">PPTI BCA Scholarship</span> program.
+              <span className="text-white border-b border-blue-500/30">PPTI BCA Scholarship</span> program.
               My journey in tech is driven by curiosity, specifically in how
               systems work behind the scenes (
-              <span className="text-white">Backend</span>) and how to secure
-              them (<span className="text-white">Cyber Security</span>).
+              <span className="text-white font-medium">Backend</span>) and how to secure
+              them (<span className="text-white font-medium">Cyber Security</span>).
             </p>
             <p>
-              When I'm not coding or exploring Kali Linux, you can find me
-              experimenting with{" "}
-              <span className="text-white">Photography </span>
-              or learning about{" "}
+              When I'm not coding or exploring <span className="italic text-gray-300">Kali Linux</span>, 
+              you can find me experimenting with{" "}
+              <span className="text-white">Photography</span> or learning about{" "}
               <span className="text-white">Machine Learning</span> models.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                04+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Semester
-              </p>
-            </div>
-
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                05+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Projects Done
-              </p>
-            </div>
-
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                20+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Git Repos
-              </p>
-            </div>
-
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                24/7
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Learning
-              </p>
-            </div>
+          {/* Statistics Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6 order-1 lg:order-2">
+            {[
+              { label: "Semester", value: "04+" },
+              { label: "Projects Done", value: "05+" },
+              { label: "Git Repos", value: "20+" },
+              { label: "Learning", value: "24/7" },
+            ].map((stat, index) => (
+              <div 
+                key={index}
+                className="bg-[#111] p-5 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group flex flex-col justify-center items-center lg:items-start"
+              >
+                <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-1 group-hover:text-blue-500 transition-colors">
+                  {stat.value}
+                </h3>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-[0.2em] font-medium text-center lg:text-left">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
