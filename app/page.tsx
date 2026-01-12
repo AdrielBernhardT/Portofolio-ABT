@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react"; // 1. TAMBAHKAN INI
+import { useState } from "react";
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 
 export default function Home() {
-  // 2. TAMBAHKAN STATE UNTUK FORM
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -17,15 +16,14 @@ export default function Home() {
     }
   };
 
-  // 3. TAMBAHKAN FUNGSI ONSUBMIT (Kirim ke Web3Forms)
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setResult("Sending....");
     
-    const formData = new FormData(event.target);
-    // DAFTAR KEY DI WEB3FORMS.COM DAN MASUKKAN DI SINI
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("access_key", "06081cd6-7a4b-44eb-a323-d0edfefef440");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -37,7 +35,7 @@ export default function Home() {
 
       if (data.success) {
         setResult("Success! Message sent successfully.");
-        event.target.reset();
+        (event.target as HTMLFormElement).reset();
       } else {
         setResult(data.message);
       }
@@ -45,7 +43,6 @@ export default function Home() {
       setResult("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
-      // Hilangkan pesan setelah 5 detik
       setTimeout(() => setResult(""), 5000);
     }
   };
@@ -181,10 +178,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* PENTING: 
-            - Tambahkan 'items-stretch' agar semua anak (card) punya tinggi sama.
-            - Di mobile, 'flex' secara default akan membuat semua anak setinggi container-nya.
-        */}
         <div className="flex items-stretch overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
           {[
             {
@@ -220,7 +213,6 @@ export default function Home() {
                 {category.title}
               </h3>
 
-              {/* 'flex-1' di sini memastikan container skill mengambil sisa ruang yang ada */}
               <div className="flex flex-wrap gap-2 md:gap-3 content-start flex-1">
                 {category.skills.map((skill) => (
                   <span
@@ -274,7 +266,7 @@ export default function Home() {
               notionLink: null,
               demoLink: null,
             },
-            // Kamu bisa tambah project ke-3 di sini untuk mengisi grid desktop
+            // tambah project lain di sini untuk mengisi grid desktop
           ].map((project, index) => (
             <div
               key={index}
@@ -388,9 +380,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Mail Me</p>
                   <p className="text-white font-medium group-hover:text-blue-500 transition-colors">
-                    adrielbth01@gmail.com
+                    Mail Me
                   </p>
                 </div>
               </a>
@@ -412,9 +403,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">WhatsApp Me</p>
                   <p className="text-white font-medium group-hover:text-blue-500 transition-colors">
-                    +62 851-5535-3750
+                    WhatsApp Me
                   </p>
                 </div>
               </a>
@@ -477,7 +467,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Kolom Kanan: Contact Form (Tampilan Saja) */}
+          {/* Kolom Kanan: Contact Form*/}
           <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 order-1 lg:order-2">
             <form onSubmit={onSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
