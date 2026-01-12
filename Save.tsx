@@ -163,9 +163,6 @@ export default function Home() {
                 "C",
                 "C++",
                 "SQL",
-                "Go",
-                "Node.js",
-                "PHP",
               ],
             },
             {
@@ -217,8 +214,6 @@ export default function Home() {
                 "Linux (Ubuntu)",
                 "VS Code",
                 "Figma",
-                "Postman",
-                "Vim",
               ],
             },
             {

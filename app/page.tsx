@@ -165,20 +165,20 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="h-auto w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="h-screen w-full md:snap-center flex flex-col justify-center py-10 px-6 max-w-7xl mx-auto overflow-hidden"
       >
-        <div className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+        <div className="mb-6 text-center md:text-left">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
             My <span className="text-blue-500">Skills</span>
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
-          {/* Hint untuk mobile user */}
-          <p className="text-white text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
-            ← Swipe Left/Right to Explore →
+          <div className="w-12 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          {/* Hint Swipe untuk semua perangkat */}
+          <p className="text-gray-500 text-[10px] mt-4 animate-pulse tracking-widest uppercase">
+            ← Swipe Left/Right to Explore Categories →
           </p>
         </div>
 
-        <div className="grid grid-flow-col grid-rows-2 overflow-x-auto pb-10 gap-4 sm:gap-6 snap-x snap-mandatory no-scrollbar md:grid-flow-row md:grid-rows-none md:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
+        <div className="grid grid-flow-col grid-rows-2 overflow-x-auto pb-6 gap-4 snap-x snap-mandatory no-scrollbar h-auto max-h-[70vh]">
           {[
             {
               title: "Backend & Languages",
@@ -261,17 +261,17 @@ export default function Home() {
           ].map((category, index) => (
             <div
               key={index}
-              className="min-w-[280px] sm:min-w-[350px] md:min-w-0 snap-start bg-[#111] p-5 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col h-full shadow-lg"
+              className="min-w-[280px] md:min-w-[320px] lg:min-w-[380px] snap-start bg-[#0a0a0a] p-4 md:p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col shadow-lg"
             >
-              <h3 className="text-lg md:text-2xl font-bold text-white mb-4 group-hover:text-blue-500 transition-colors">
+              <h3 className="text-sm md:text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors uppercase tracking-wider">
                 {category.title}
               </h3>
 
-              <div className="flex flex-wrap gap-2 md:gap-3 content-start flex-1">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 content-start flex-1">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-2.5 py-1.5 md:px-4 md:py-2 bg-gray-950 border border-gray-800 rounded-lg text-[10px] md:text-sm text-gray-400 group-hover:text-gray-200 group-hover:border-gray-600 transition-all duration-300"
+                    className="px-2 py-1 bg-gray-900 border border-gray-800 rounded text-[9px] md:text-[11px] text-gray-400 group-hover:text-gray-200 group-hover:border-gray-700 transition-all duration-300 whitespace-nowrap"
                   >
                     {skill}
                   </span>
