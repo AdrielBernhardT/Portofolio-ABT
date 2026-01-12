@@ -173,7 +173,7 @@ export default function Home() {
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
           {/* Hint untuk mobile user */}
-          <p className="text-gray-500 text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
+          <p className="text-white text-[10px] sm:text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
             ← Swipe Left/Right to Explore →
           </p>
         </div>
@@ -292,7 +292,7 @@ export default function Home() {
             My <span className="text-blue-500">Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
-          <p className="text-gray-500 text-xs mt-4 md:hidden animate-pulse">
+          <p className="text-white text-xs mt-4 md:hidden animate-pulse">
             ← Swipe to see projects →
           </p>
         </div>
