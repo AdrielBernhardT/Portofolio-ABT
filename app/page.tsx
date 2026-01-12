@@ -165,7 +165,7 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="h-auto w-full md:snap-start flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
@@ -231,7 +231,7 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="h-auto w-full md:snap-start flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
