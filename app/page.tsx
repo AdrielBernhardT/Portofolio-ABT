@@ -292,17 +292,17 @@ export default function Home() {
             My <span className="text-blue-500">Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
-          <p className="text-white text-xs mt-4 md:hidden animate-pulse">
+          <p className="text-white text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
             ← Swipe to see projects →
           </p>
         </div>
 
-        <div className="flex overflow-x-auto pb-10 gap-5 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 md:overflow-visible md:pb-0">
+        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-2 xl:gap-8 md:overflow-visible md:pb-0">
           {[
             {
               backgroundImage: project1,
               title: "EduTIA",
-              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills.",
+              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We connect graduates directly with corporate partners to secure roles that match their specialties.",
               tech: ["Next.js", "PostgreSQL", "Prisma"],
               type: "Full Stack",
               githubLink: "https://github.com/leonardo-alexander/EduTIA",
@@ -310,20 +310,19 @@ export default function Home() {
             },
             {
               title: "ATAIM",
-              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection.",
+              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection to ensure a secure and efficient verification process.",
               tech: ["Python", "Flask", "Dlib", "YOLOv5"],
               type: "AI & Full Stack",
               githubLink: "https://github.com/AdrielBernhardT/...",
               notionLink: null,
             },
-            // Tambahkan project lain
           ].map((project, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[300px] md:min-w-0 max-w-lg mx-auto md:mx-0 snap-center bg-[#111] rounded-xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-md"
+              className="min-w-[85%] sm:min-w-[300px] md:min-w-0 w-full lg:max-w-none snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
             >
-              {/* Bagian 1: Image */}
-              <div className="h-40 sm:h-44 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
+              {/* Bagian 1: Image - h-48 agar lebih proporsional dengan card yang panjang */}
+              <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
                 {project.backgroundImage ? (
                   <Image
                     src={project.backgroundImage}
@@ -333,50 +332,49 @@ export default function Home() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-                    <span className="text-gray-700 font-black text-5xl group-hover:text-blue-500/20 transition-colors duration-500">
+                    <span className="text-gray-700 font-black text-6xl group-hover:text-blue-500/20 transition-colors duration-500">
                       {project.title.charAt(0)}
                     </span>
                   </div>
                 )}
                 
-                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
+                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
                   {project.type}
                 </div>
               </div>
 
               {/* Bagian 2: Content */}
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">
+              <div className="p-6 md:p-8 flex flex-col flex-1">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-400 text-xs mb-4 line-clamp-3 leading-relaxed">
+                <p className="text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed">
                   {project.desc}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-2 mb-8">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-[9px] px-2 py-0.5 bg-gray-950 text-gray-500 rounded border border-gray-800"
+                      className="text-[10px] px-3 py-1 bg-gray-950 text-gray-400 rounded-md border border-gray-800 group-hover:border-gray-700 transition"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                {/* Action Links */}
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-800/50">
+                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-gray-800/50">
                   {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-all">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                      CODE
+                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                      Code
                     </a>
                   )}
                   {project.notionLink && (
-                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-all">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                      DOCS
+                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                      Docs
                     </a>
                   )}
                 </div>
