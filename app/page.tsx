@@ -1,15 +1,52 @@
 "use client";
 
+import { useState } from "react"; // 1. TAMBAHKAN INI
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 
 export default function Home() {
-  // --- Fungsi untuk Scroll ke Contact ---
+  // 2. TAMBAHKAN STATE UNTUK FORM
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // 3. TAMBAHKAN FUNGSI ONSUBMIT (Kirim ke Web3Forms)
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending....");
+    
+    const formData = new FormData(event.target);
+    // DAFTAR KEY DI WEB3FORMS.COM DAN MASUKKAN DI SINI
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Success! Message sent successfully.");
+        event.target.reset();
+      } else {
+        setResult(data.message);
+      }
+    } catch (error) {
+      setResult("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      // Hilangkan pesan setelah 5 detik
+      setTimeout(() => setResult(""), 5000);
     }
   };
 
@@ -310,15 +347,9 @@ export default function Home() {
       </section>
 
       {/* ================= CONTACT SECTION ================= */}
-      <section
-        id="contact"
-        className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
-      >
-        {/* Judul Section */}
-        <div className="mb-5 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-white mb-2">
-            Contact <span className="text-blue-500">Me</span>
-          </h2>
+      <section id="contact" className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto">
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Contact <span className="text-blue-500">Me</span></h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
@@ -447,51 +478,36 @@ export default function Home() {
           </div>
 
           {/* Kolom Kanan: Contact Form (Tampilan Saja) */}
-          <div className="bg-[#111] p-8 rounded-2xl border border-gray-800">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 order-1 lg:order-2">
+            <form onSubmit={onSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Your Name</label>
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  />
+                  <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Name</label>
+                  <input type="text" name="name" required placeholder="Your Name" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Your Email</label>
-                  <input
-                    type="email"
-                    placeholder="john@example.com"
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  />
+                  <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Email</label>
+                  <input type="email" name="email" required placeholder="Your Email" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
               </div>
-
               <div className="space-y-2">
-                <label className="text-sm text-gray-400">Subject</label>
-                <input
-                  type="text"
-                  placeholder="Project Collaboration"
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                />
+                <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Message</label>
+                <textarea name="message" required rows={4} placeholder="How can I help you?" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none"></textarea>
               </div>
-
-              <div className="space-y-2">
-                <label className="text-sm text-gray-400">Message</label>
-                <textarea
-                  rows={4}
-                  placeholder="Hi Adriel, I'd like to discuss..."
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-blue-500/20"
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 text-white font-bold py-4 rounded-xl transition-all active:scale-95 shadow-lg shadow-blue-500/20"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Tampilkan Status Pengiriman */}
+              {result && (
+                <p className={`text-center text-sm font-medium mt-4 ${result.includes("Success") ? "text-green-500" : "text-red-500"}`}>
+                  {result}
+                </p>
+              )}
             </form>
           </div>
         </div>
