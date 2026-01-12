@@ -5,6 +5,7 @@ import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 
 export default function Home() {
+  // --- Fungsi untuk Scroll ke Contact ---
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
@@ -13,50 +14,49 @@ export default function Home() {
   };
 
   return (
-    <main className="w-full bg-black text-white selection:bg-blue-500/30">
+    <main className="w-full bg-black text-white">
       {/* ================= HOME SECTION ================= */}
       <section
         id="home"
-        /* Menggunakan min-h-svh agar lebih akurat di browser mobile (iOS/Android) */
-        className="min-h-svh w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 px-6 py-10 max-w-7xl mx-auto overflow-hidden"
+        className="h-screen w-full snap-center flex flex-col md:flex-row items-center justify-center gap-10 px-6 max-w-7xl mx-auto"
       >
-        <div className="space-y-4 text-center md:text-left order-2 md:order-1 flex-1">
-          <h2 className="text-sm md:text-xl text-blue-500 tracking-[0.2em] font-bold">
+        <div className="space-y-4 text-center md:text-left order-2 md:order-1">
+          <h2 className="text-xl text-blue-500 tracking-widest">
             HELLO, MY NAME IS
           </h2>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight">
-            ADRIEL <br className="hidden md:block" />
-            <span className="text-gray-500 text-xl sm:text-2xl md:text-4xl font-bold block mt-2">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-none">
+            ADRIEL <br />
+            <span className="text-gray-500 text-2xl md:text-4xl font-bold block mt-2">
               BERNHARD TANUHARIONO
             </span>
           </h1>
 
-          <div className="w-16 md:w-24 h-1 bg-gray-700 my-4 md:my-6 rounded-full mx-auto md:mx-0"></div>
+          <div className="w-24 h-1 bg-gray-700 my-6 rounded-full mx-auto md:mx-0"></div>
 
-          <p className="max-w-lg text-gray-400 text-base md:text-lg leading-relaxed">
-            Computer Science Student at BINUS Online collaboration with Bank
+          <p className="max-w-lg text-gray-400 text-lg">
+            Computer Science Student at BINUS Online coloboration with Bank
             Central Asia as a PPTI Scholarship Awardee. Passionate about{" "}
             <span className="text-white font-bold">Backend</span> and{" "}
             <span className="text-white font-bold">Cyber Security</span>.
           </p>
 
           <div className="pt-6">
+            {/* BUTTON UPDATE: Menambahkan onClick dan memperbaiki class rounded */}
             <button
               onClick={scrollToContact}
-              className="w-full md:w-auto border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-bold text-sm tracking-wider"
+              className="border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-bold"
             >
               CONTACT ME
             </button>
           </div>
         </div>
 
-        <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden shrink-0">
+        <div className="relative w-64 h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden">
           <Image
             src={mainImage}
             alt="Profile Image Adriel"
             fill
-            priority
-            className="object-cover object-top scale-110 md:scale-125"
+            className="object-cover object-top origin-top scale-125"
           />
         </div>
       </section>
@@ -64,18 +64,17 @@ export default function Home() {
       {/* ================= ABOUT SECTION ================= */}
       <section
         id="about"
-        /* Di mobile kita ganti min-h agar konten panjang tidak terpotong */
-        className="min-h-screen w-full flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="h-screen w-full snap-center flex flex-col justify-center py-10 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-10 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-white mb-2">
             About <span className="text-blue-500">Me</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
-          <div className="space-y-6 text-gray-400 leading-relaxed text-base md:text-lg">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 text-gray-400 leading-relaxed text-lg">
             <p>
               Hi! I'm{" "}
               <span className="text-white font-semibold">
@@ -88,37 +87,56 @@ export default function Home() {
             <p>
               I am currently part of the prestigious{" "}
               <span className="text-white">PPTI BCA Scholarship</span> program.
-              My journey in tech is driven by curiosity in{" "}
-              <span className="text-white">Backend</span> and{" "}
-              <span className="text-white">Cyber Security</span>.
+              My journey in tech is driven by curiosity, specifically in how
+              systems work behind the scenes (
+              <span className="text-white">Backend</span>) and how to secure
+              them (<span className="text-white">Cyber Security</span>).
             </p>
             <p>
-              When I'm not coding, you can find me experimenting with{" "}
-              <span className="text-white">Photography</span> or learning about{" "}
+              When I'm not coding or exploring Kali Linux, you can find me
+              experimenting with{" "}
+              <span className="text-white">Photography </span>
+              or learning about{" "}
               <span className="text-white">Machine Learning</span> models.
             </p>
           </div>
 
-          {/* Stats Grid - Responsive Column */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6">
-            {[
-              { val: "04+", label: "Semester" },
-              { val: "05+", label: "Projects Done" },
-              { val: "20+", label: "Git Repos" },
-              { val: "24/7", label: "Learning" },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="bg-[#111] p-5 md:p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group"
-              >
-                <h3 className="text-white text-2xl md:text-3xl font-bold mb-1 group-hover:scale-105 transition origin-left">
-                  {stat.val}
-                </h3>
-                <p className="text-[10px] md:text-xs text-blue-500 uppercase tracking-widest font-semibold">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
+                04+
+              </h3>
+              <p className="text-sm text-blue-500 uppercase tracking-widest">
+                Semester
+              </p>
+            </div>
+
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
+                05+
+              </h3>
+              <p className="text-sm text-blue-500 uppercase tracking-widest">
+                Projects Done
+              </p>
+            </div>
+
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
+                20+
+              </h3>
+              <p className="text-sm text-blue-500 uppercase tracking-widest">
+                Git Repos
+              </p>
+            </div>
+
+            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
+              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
+                24/7
+              </h3>
+              <p className="text-sm text-blue-500 uppercase tracking-widest">
+                Learning
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -126,54 +144,114 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="min-h-screen w-full flex flex-col py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full snap-start flex flex-col py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <div className="mb-3 text-center md:text-left">
+          <h2 className="text-4xl font-bold text-white mb-2">
             My <span className="text-blue-500">Skills</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
               title: "Backend & Languages",
-              skills: ["Python", "Java", "C", "C++", "SQL", "Go", "Node.js", "PHP"],
+              skills: [
+                "Python",
+                "Java",
+                "C",
+                "C++",
+                "SQL",
+                "Go",
+                "Node.js",
+                "PHP",
+              ],
             },
             {
               title: "Cyber Security",
-              skills: ["Linux (Kali)", "Wireshark", "PenTest", "Metasploit", "Nmap"],
+              skills: [
+                "Linux (Kali)",
+                "Network Analysis",
+                "Wireshark",
+                "Penetration Testing",
+                "Burp Suite",
+                "Cryptography",
+                "Metasploit",
+                "Nmap",
+              ],
             },
             {
               title: "Data & ML",
-              skills: ["Pandas", "Scikit-Learn", "TensorFlow", "NumPy", "Matplotlib"],
+              skills: [
+                "Pandas",
+                "Scikit-Learn",
+                "Data Visualization",
+                "Jupyter",
+                "NumPy",
+                "Matplotlib",
+                "BioPython",
+                "Seaborn",
+                "TensorFlow",
+                "Pyplotlib",
+                "Regression",
+                "Random Forest",
+              ],
             },
             {
               title: "Web Dev",
-              skills: ["Next.js", "Tailwind CSS", "React", "TypeScript", "REST API"],
+              skills: [
+                "Next.js",
+                "Tailwind CSS",
+                "HTML5/CSS3",
+                "React",
+                "TypeScript",
+                "REST API",
+              ],
             },
             {
               title: "Tools & DevOps",
-              skills: ["Git", "Docker", "Linux", "Postman", "Figma", "Vim"],
+              skills: [
+                "Git & GitHub",
+                "Docker",
+                "Linux (Ubuntu)",
+                "VS Code",
+                "Figma",
+                "Postman",
+                "Vim",
+              ],
             },
             {
               title: "Soft Skills",
-              skills: ["Problem Solving", "Teamwork", "Public Speaking", "Photography"],
+              skills: [
+                "Problem Solving",
+                "Teamwork",
+                "Adaptability",
+                "Critical Thinking",
+                "English",
+                "Project Management",
+                "Public Speaking",
+                "Time Management",
+                "Marketing",
+                "Photography",
+                "Sport",
+                "Music",
+              ],
             },
           ].map((category, index) => (
             <div
               key={index}
-              className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 group"
+              className="bg-[#111] p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group h-full"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4 group-hover:text-blue-500 transition-colors">
+              <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-2 md:gap-3">
+
+              <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-900 border border-gray-700 rounded-full text-xs md:text-sm text-gray-300 group-hover:border-blue-500/50 transition"
+                    className="px-4 py-2 bg-gray-900 border border-gray-700 rounded-full text-sm text-gray-300 group-hover:border-blue-500/50 transition"
                   >
                     {skill}
                   </span>
@@ -187,73 +265,161 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="min-h-screen w-full flex flex-col py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full snap-start flex flex-col py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <div className="mb-3 text-center md:text-left">
+          <h2 className="text-4xl font-bold text-white mb-2">
             My <span className="text-blue-500">Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
               backgroundImage: project1,
               title: "EduTIA",
-              desc: "Online learning platform for Indonesian youth to gain industry-relevant skills and connect with corporate partners.",
+              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We offer courses specifically designed to meet the demands of the local job market. Beyond training, we connect graduates directly with corporate partners to help them secure roles that match their specialties.",
               tech: ["Next.js", "PostgreSQL", "Prisma"],
               type: "Full Stack",
-              githubLink: "#",
-              notionLink: "#",
+              githubLink: "https://github.com/leonardo-alexander/EduTIA",
+              notionLink:
+                "https://www.notion.so/29c76c253de88022b2b6ccb5ee1d453f?v=29c76c253de880308656000cccfa1dbd",
+              demoLink: null,
             },
             {
               title: "ATAIM",
-              desc: "Camera-based attendance system using real-time facial recognition and object detection for secure verification.",
-              tech: ["Python", "Flask", "Dlib", "YOLOv5"],
-              type: "AI & Web",
-              githubLink: "#",
+              desc: "ATAIM is an attendance system that operates entirely through a camera-based interface. It utilizes real-time facial recognition technology to accurately identify and log individuals. Additionally, the system incorporates object detection to ensure a secure and efficient verification process.",
+              tech: ["Jupyter", "Python", "Flask", "Dlib", "YOLOv5"],
+              type: "Full Stack",
+              githubLink:
+                "https://github.com/AdrielBernhardT/Artificial-Intelligence/tree/main/ATAIM",
+              notionLink: null,
+              demoLink: null,
             },
           ].map((project, index) => (
             <div
               key={index}
-              className="bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 group flex flex-col overflow-hidden"
+              className="bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group flex flex-col overflow-hidden h-auto"
             >
-              <div className="h-40 md:h-48 w-full bg-gray-900 relative">
+              {/* Bagian 1: Logic Gambar / Placeholder */}
+              <div className="h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
                 {project.backgroundImage ? (
                   <Image
                     src={project.backgroundImage}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-800">
-                    {project.title.charAt(0)}
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="text-gray-600 font-bold text-4xl group-hover:scale-110 transition-transform duration-300">
+                      {project.title.charAt(0)}
+                    </span>
                   </div>
                 )}
-                <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-blue-400 border border-blue-500/30">
+
+                <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-blue-400 border border-blue-500/30 z-10">
                   {project.type}
                 </div>
               </div>
 
-              <div className="p-5 md:p-6 flex flex-col flex-1">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">
+              {/* Bagian 2: Konten */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 text-xs md:text-sm mb-4 line-clamp-3">
+
+                <p className="text-gray-400 text-sm mb-6 flex-1 leading-relaxed">
                   {project.desc}
                 </p>
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((t) => (
-                    <span key={t} className="text-[10px] px-2 py-1 bg-gray-900 text-gray-400 rounded-md border border-gray-800">
+                    <span
+                      key={t}
+                      className="text-xs px-3 py-1 bg-gray-900 text-gray-300 rounded-full border border-gray-800"
+                    >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-800/50 text-xs font-medium text-gray-400">
-                  {project.githubLink && <span className="hover:text-white cursor-pointer">Code</span>}
-                  {project.notionLink && <span className="hover:text-white cursor-pointer">Docs</span>}
+
+                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-800/50">
+                  {/* 1. GitHub Link */}
+                  {project.githubLink && (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
+                    >
+                      <svg
+                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span>Code</span>
+                    </a>
+                  )}
+
+                  {/* 2. Notion Link (Docs) */}
+                  {project.notionLink && (
+                    <a
+                      href={project.notionLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
+                    >
+                      <svg
+                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                      </svg>
+                      <span>Docs</span>
+                    </a>
+                  )}
+
+                  {/* 3. Demo Link (Live) */}
+                  {project.demoLink && (
+                    <a
+                      href={project.demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
+                    >
+                      <svg
+                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        ></path>
+                      </svg>
+                      <span>Live</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -261,7 +427,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CONTACT SECTION ================= */}
       {/* ================= CONTACT SECTION ================= */}
       <section
         id="contact"
