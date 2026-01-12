@@ -142,8 +142,8 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-4 md:gap-6 order-1 lg:order-2">
             {[
               { label: "Semester", value: "04+" },
-              { label: "Projects Done", value: "05+" },
-              { label: "Git Repos", value: "20+" },
+              { label: "Skills", value: "20+" },
+              { label: "Git Repos", value: "10+" },
               { label: "Learning", value: "24/7" },
             ].map((stat, index) => (
               <div 
@@ -165,7 +165,7 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="h-auto w-full md:snap-start flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto"
+        className="h-auto w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">

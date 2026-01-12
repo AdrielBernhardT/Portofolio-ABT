@@ -91,7 +91,6 @@ const Navbar = () => {
         </button>
 
         {/* --- MOBILE MENU OVERLAY --- */}
-        {/* Menggunakan bg-black pekat dan padding yang lebih rapi */}
         <div className={`fixed inset-0 bg-black z-[120] flex flex-col transition-all duration-500 md:hidden ${
           isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}>
@@ -104,7 +103,7 @@ const Navbar = () => {
                   key={item}
                   href={`#${id}`}
                   onClick={(e) => handleScroll(e, id)}
-                  // Ukuran teks mobile diperkecil menjadi text-xl
+
                   className={`text-xl font-bold uppercase tracking-[0.2em] transition-all ${
                     isActive ? "text-blue-500 scale-105" : "text-white/70"
                   }`}
