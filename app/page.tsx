@@ -285,9 +285,9 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="h-auto w-full md:snap-start flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto"
+        className="h-auto w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-10 text-center md:text-left">
+        <div className="mb-3 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             My <span className="text-blue-500">Projects</span>
           </h2>
@@ -321,7 +321,7 @@ export default function Home() {
               key={index}
               className="min-w-[85%] sm:min-w-[300px] md:min-w-0 w-full lg:max-w-none snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
             >
-              {/* Bagian 1: Image - h-48 agar lebih proporsional dengan card yang panjang */}
+              {/* Bagian 1: Image */}
               <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
                 {project.backgroundImage ? (
                   <Image
