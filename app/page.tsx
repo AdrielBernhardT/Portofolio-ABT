@@ -178,11 +178,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* CONTAINER BARU:
-          - Mobile: Menggunakan Grid dengan 'grid-flow-col' dan 'grid-rows-2' 
-            untuk memaksa card mengisi ke samping dalam 2 baris.
-          - Desktop: Kembali ke Grid standar (3 kolom).
-        */}
         <div className="grid grid-flow-col grid-rows-2 overflow-x-auto pb-10 gap-4 sm:gap-6 snap-x snap-mandatory no-scrollbar md:grid-flow-row md:grid-rows-none md:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
           {[
             {
@@ -243,79 +238,73 @@ export default function Home() {
             My <span className="text-blue-500">Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
-          {/* Hint Swipe untuk Mobile */}
           <p className="text-gray-500 text-xs mt-4 md:hidden animate-pulse">
             ← Swipe to see projects →
           </p>
         </div>
 
-        {/* Container dengan Horizontal Scroll di Mobile & Grid di Desktop */}
-        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
+        <div className="flex overflow-x-auto pb-10 gap-5 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 md:overflow-visible md:pb-0">
           {[
             {
               backgroundImage: project1,
               title: "EduTIA",
-              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We connect graduates directly with corporate partners.",
+              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills.",
               tech: ["Next.js", "PostgreSQL", "Prisma"],
               type: "Full Stack",
               githubLink: "https://github.com/leonardo-alexander/EduTIA",
               notionLink: "https://www.notion.so/...",
-              demoLink: null,
             },
             {
               title: "ATAIM",
-              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection for secure verification.",
-              tech: ["Jupyter", "Python", "Flask", "Dlib", "YOLOv5"],
+              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection.",
+              tech: ["Python", "Flask", "Dlib", "YOLOv5"],
               type: "AI & Full Stack",
               githubLink: "https://github.com/AdrielBernhardT/...",
               notionLink: null,
-              demoLink: null,
             },
-            // tambah project lain di sini untuk mengisi grid desktop
+            // Tambahkan project lain
           ].map((project, index) => (
             <div
               key={index}
-              className="min-w-[90%] sm:min-w-[70%] md:min-w-0 snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
+              className="min-w-[85%] sm:min-w-[300px] md:min-w-0 max-w-sm mx-auto md:mx-0 snap-center bg-[#111] rounded-xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-md"
             >
-              {/* Bagian 1: Image Placeholder */}
-              <div className="h-48 sm:h-56 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
+              {/* Bagian 1: Image */}
+              <div className="h-40 sm:h-44 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
                 {project.backgroundImage ? (
                   <Image
                     src={project.backgroundImage}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-                    <span className="text-gray-700 font-black text-6xl group-hover:text-blue-500/20 transition-colors duration-500">
+                    <span className="text-gray-700 font-black text-5xl group-hover:text-blue-500/20 transition-colors duration-500">
                       {project.title.charAt(0)}
                     </span>
                   </div>
                 )}
                 
-                {/* Badge Type */}
-                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
+                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[9px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
                   {project.type}
                 </div>
               </div>
 
               {/* Bagian 2: Content */}
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">
+              <div className="p-5 flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm mb-6 line-clamp-4 md:line-clamp-none lg:line-clamp-4 leading-relaxed">
+                <p className="text-gray-400 text-xs mb-4 line-clamp-3 leading-relaxed">
                   {project.desc}
                 </p>
 
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-1.5 mb-5">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] px-2.5 py-1 bg-gray-950 text-gray-400 rounded-md border border-gray-800 group-hover:border-gray-700 transition"
+                      className="text-[9px] px-2 py-0.5 bg-gray-950 text-gray-500 rounded border border-gray-800"
                     >
                       {t}
                     </span>
@@ -323,16 +312,16 @@ export default function Home() {
                 </div>
 
                 {/* Action Links */}
-                <div className="flex items-center gap-5 mt-auto pt-5 border-t border-gray-800/50">
+                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-800/50">
                   {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-all">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                       CODE
                     </a>
                   )}
                   {project.notionLink && (
-                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white transition-all hover:-translate-y-0.5">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-white transition-all">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                       DOCS
                     </a>
                   )}
@@ -342,7 +331,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       {/* ================= CONTACT SECTION ================= */}
       <section id="contact" className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto">
         <div className="mb-10 text-center md:text-left">
