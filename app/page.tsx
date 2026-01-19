@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
@@ -10,6 +10,26 @@ import project3 from "./images/project-3.png";
 export default function Home() {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // 1. REF UNTUK PROJECTS SCROLL
+  const projectContainerRef = useRef<HTMLDivElement>(null);
+
+  // 2. LOGIC UBAH VERTICAL SCROLL JADI HORIZONTAL DI PROJECTS
+  useEffect(() => {
+    const container = projectContainerRef.current;
+    if (container) {
+      const handleWheel = (e: WheelEvent) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+        }
+      };
+      container.addEventListener("wheel", handleWheel, { passive: false });
+      return () => {
+        container.removeEventListener("wheel", handleWheel);
+      };
+    }
+  }, []);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -24,7 +44,6 @@ export default function Home() {
     setResult("Sending....");
     
     const formData = new FormData(event.currentTarget);
-
     formData.append("access_key", "06081cd6-7a4b-44eb-a323-d0edfefef440");
 
     try {
@@ -32,9 +51,7 @@ export default function Home() {
         method: "POST",
         body: formData
       });
-
       const data = await response.json();
-
       if (data.success) {
         setResult("Success! Message sent successfully.");
         (event.target as HTMLFormElement).reset();
@@ -402,7 +419,10 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0">
+        <div 
+          ref={projectContainerRef}
+          className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0"
+        >
           {[
             {
               backgroundImage: project1,
