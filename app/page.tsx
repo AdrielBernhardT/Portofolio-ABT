@@ -113,7 +113,6 @@ export default function Home() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Text Content */}
           <div className="space-y-5 text-gray-400 leading-relaxed text-base md:text-lg order-2 lg:order-1">
             <p>
               Hi! I'm{" "}
@@ -165,22 +164,19 @@ export default function Home() {
       </section>
 
       {/* ================= TIMELINE SECTION ================= */}
-      {/* ================= TIMELINE SECTION ================= */}
       <section
         id="timeline"
-        className="min-h-screen w-full md:snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-10 text-center md:text-left">
+        <div className="mb-12 md:pl-20"> 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             My <span className="text-blue-500">Journey</span>
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          <div className="w-16 h-1 bg-gray-500 rounded-full"></div>
         </div>
 
         <div className="relative">
-          {/* Garis Vertikal Tengah */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 h-full w-0.5 bg-gray-800"></div>
-
+          <div className="absolute left-8 top-0 h-full w-0.5 bg-gray-800"></div>
           <div className="space-y-12">
             {[
               {
@@ -238,33 +234,28 @@ export default function Home() {
                 ),
               },
             ].map((item, index) => (
-              <div
-                key={index}
-                className={`relative flex items-center justify-between md:justify-normal w-full ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                <div className="hidden md:block w-5/12"></div>
+              <div key={index} className="relative flex items-start">
 
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 bg-blue-600 rounded-full border-4 border-[#0a0a0a] z-10 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                <div className="absolute left-8 transform -translate-x-1/2 mt-1 w-10 h-10 bg-blue-600 rounded-full border-4 border-[#0a0a0a] z-10 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)]">
                     {item.icon}
                 </div>
 
-                <div className="w-full md:w-5/12 pl-16 md:pl-0">
-                  <div
-                    className={`bg-[#111] p-6 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group shadow-lg ${
-                      index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
-                    }`}
-                  >
-                    <span className="text-blue-500 text-xs font-bold tracking-widest uppercase mb-2 block">
-                      {item.year}
-                    </span>
-                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-xs font-semibold uppercase mb-4 tracking-wider">
-                      {item.place}
-                    </p>
+                <div className="ml-20 w-full">
+                  <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group shadow-lg">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                        <div>
+                            <span className="text-blue-500 text-xs font-bold tracking-widest uppercase mb-1 block">
+                            {item.year}
+                            </span>
+                            <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                            {item.title}
+                            </h3>
+                        </div>
+                        <span className="text-gray-500 text-xs font-semibold uppercase mt-2 md:mt-0 tracking-wider md:text-right">
+                        {item.place}
+                        </span>
+                    </div>
+                    
                     <p className="text-gray-400 text-sm leading-relaxed">
                       {item.desc}
                     </p>
