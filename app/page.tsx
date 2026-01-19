@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
+import project2 from "./images/project-2.png";
 
 export default function Home() {
   const [result, setResult] = useState("");
@@ -315,6 +316,31 @@ export default function Home() {
               type: "AI & Full Stack",
               githubLink: "https://github.com/AdrielBernhardT/...",
               notionLink: null,
+            },
+            {
+              title: "LUMEO",
+              desc: "LUMEO is a digital platform that offers a curated collection of movies, series, and entertainment content. It provides an intuitive interface for smooth browsing and streaming.",
+              tech: ["Figma"],
+              type: "UI/UX & Frontend",
+              githubLink: null,
+              notionLink: "https://descriptive-pie-f20.notion.site/Human-Computer-Interaction-29a5a90a0af580ee8d1be73fcd51d9b1",
+            },
+            {
+              title: "FIMA",
+              desc: "FIMA is a comprehensive financial management application designed to streamline personal budgeting and expense tracking through an intuitive interface and real-time analytics.",
+              tech: ["Figma"],
+              type: "UI/UX & Frontend",
+              githubLink: null,
+              notionLink: "https://descriptive-pie-f20.notion.site/Entrepreneur-Prototyping-2ed5a90a0af580cdb896d87baa22b4e9",
+            },
+            {
+              backgroundImage: project2,
+              title: "PALORANT",
+              desc: "Palorant is a fun mini project inspired by Valorant, designed to showcase character abilities and interactions through an engaging web interface.",
+              tech: ["Figma", "HTML", "CSS", "JavaScript"],
+              type: "UI/UX & Frontend",
+              githubLink: "https://github.com/AdrielBernhardT/Human-Computer-Interaction/tree/main/Project%20Lab",
+              notionLink: "https://www.figma.com/design/CT7GbEhedIFBminRRL9mx4/HCI-Lab-Figma?t=x64y4LJOa5pGRGyA-1",
             },
           ].map((project, index) => (
             <div
