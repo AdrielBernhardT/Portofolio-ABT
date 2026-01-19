@@ -7,7 +7,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
+  const navLinks = ["Home", "About", "Timeline", "Skills", "Projects", "Contact"];
 
   // Menangani error "Cannot find name 'scrollToContact'"
   const scrollToContact = () => {
