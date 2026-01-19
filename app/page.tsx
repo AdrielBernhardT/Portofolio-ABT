@@ -190,11 +190,11 @@ export default function Home() {
       const totalContentWidth = container.scrollWidth;
       const singleSetWidth = totalContentWidth / 2;
 
-      if (scrollPosition >= singleSetWidth) {
+      if (scrollPosition >= singleSetWidth - 10) {
         container.scrollLeft = scrollPosition - singleSetWidth;
       } 
 
-      else if (scrollPosition <= 0) {
+      else if (scrollPosition <= 10) {
         container.scrollLeft = singleSetWidth + scrollPosition;
       }
 
@@ -202,7 +202,6 @@ export default function Home() {
       if (firstCard) {
         const itemWidth = firstCard.clientWidth + 24;
         const rawIndex = Math.round(scrollPosition / itemWidth);
-        
         setActiveIndex(rawIndex % originalProjects.length);
       }
     }
@@ -614,7 +613,7 @@ export default function Home() {
         <div 
           ref={projectContainerRef}
           onScroll={handleScroll}
-          className="flex overflow-x-auto pb-12 gap-6 no-scrollbar xl:gap-8 px-4 md:px-0 scroll-smooth items-center"
+          className="flex overflow-x-auto pb-12 gap-6 no-scrollbar xl:gap-8 px-4 md:px-0 items-center"
         >
           {loopedProjects.map((project, index) => {
             const isPhotography = project.category === "Photography";
@@ -706,10 +705,14 @@ export default function Home() {
                 key={index}
                 onClick={() => {
                    // Fitur tambahan: Klik dot untuk scroll ke kartu tsb
-                   if(projectContainerRef.current) {
-                      const cardWidth = projectContainerRef.current.children[0]?.clientWidth || 500;
-                      projectContainerRef.current.scrollTo({ left: index * (cardWidth + 24), behavior: 'smooth' });
-                   }
+                  if(projectContainerRef.current) {
+                    const cardWidth = projectContainerRef.current.children[0]?.clientWidth || 500;
+                    const targetPos = index * (cardWidth + 24);
+                    projectContainerRef.current.scrollTo({ 
+                      left: targetPos, 
+                      behavior: 'smooth' 
+                    });
+                  }
                 }}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex ? "bg-white scale-125" : "bg-gray-700 hover:bg-gray-500"
