@@ -421,7 +421,7 @@ export default function Home() {
 
         <div 
           ref={projectContainerRef}
-          className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0"
+          className="flex overflow-x-auto pb-10 gap-6 snap-x snap-proximit no-scrollbar xl:gap-8 md:pb-0 pr-6 md:pr-20"
         >
           {[
             {
