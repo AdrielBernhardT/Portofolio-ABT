@@ -164,6 +164,118 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= TIMELINE SECTION ================= */}
+      {/* ================= TIMELINE SECTION ================= */}
+      <section
+        id="timeline"
+        className="min-h-screen w-full md:snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+      >
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+            My <span className="text-blue-500">Journey</span>
+          </h2>
+          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+        </div>
+
+        <div className="relative">
+          {/* Garis Vertikal Tengah */}
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 h-full w-0.5 bg-gray-800"></div>
+
+          <div className="space-y-12">
+            {[
+              {
+                year: "2025 - Present",
+                title: "Full Stack & Projects",
+                place: "Personal & Academic",
+                desc: "Building portfolio projects using Next.js. Deepening knowledge in Cyber Security (Kali Linux) and Machine Learning.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                ),
+              },
+              {
+                year: "2024 - 2026",
+                title: "University & Growth",
+                place: "BINUS Online & PPTI BCA",
+                desc: "Progressing through and focused on Algorithm Programming, Cyber Security, and Machine Learning. Active in exploring new tech stacks like React, Tailwind, and Cyber Tools using Kali Linux.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                ),
+              },
+              {
+                year: "2024",
+                title: "The Beginning",
+                place: "BCA Learning Institute, Sentul City, West Java",
+                desc: "Awarded the PPTI BCA Scholarship, marking the start of my formal education in Computer Science. Joined BINUS Online to pursue my Bachelor's degree.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                ),
+              },
+              {
+                year: "2023",
+                title: "Marketing Intern at Vision Allianz",
+                place: "Pluit, Jakarta and Semarang, Central Java",
+                desc: "Gained valuable professional exposure by assisting in strategic marketing initiatives. Developed strong interpersonal and communication skills while learning how to bridge the gap between business requirements and client needs in a corporate environment.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                ),
+              },
+              {
+                year: "2022-2023",
+                title: "Academic Foundation",
+                place: "BINUS Kemanggisan, Jakarta",
+                desc: "Adopted a rapid-learning mindset to absorb fundamental Computer Science concepts. Focused on mastering the basics of C++, algorithm logic, and computational thinking to build a rock-solid foundation for future software engineering challenges.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                ),
+              },
+              {
+                year: "2022",
+                title: "Winner of National Science Olympiad (OSN-K)",
+                place: "Semarang District, Central Java",
+                desc: "Demonstrated exceptional problem-solving skills by securing a victory at the District Level. Competed against top talent in Competitive Programming and Logic, successfully qualifying for the Provincial Level (OSN-P) in the highly competitive Informatics sector.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                ),
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`relative flex items-center justify-between md:justify-normal w-full ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                <div className="hidden md:block w-5/12"></div>
+
+                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 bg-blue-600 rounded-full border-4 border-[#0a0a0a] z-10 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                    {item.icon}
+                </div>
+
+                <div className="w-full md:w-5/12 pl-16 md:pl-0">
+                  <div
+                    className={`bg-[#111] p-6 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group shadow-lg ${
+                      index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
+                    }`}
+                  >
+                    <span className="text-blue-500 text-xs font-bold tracking-widest uppercase mb-2 block">
+                      {item.year}
+                    </span>
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-xs font-semibold uppercase mb-4 tracking-wider">
+                      {item.place}
+                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
