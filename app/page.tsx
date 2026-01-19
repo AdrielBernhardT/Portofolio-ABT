@@ -190,11 +190,11 @@ export default function Home() {
       const totalContentWidth = container.scrollWidth;
       const singleSetWidth = totalContentWidth / 2;
 
-      if (scrollPosition >= singleSetWidth - 10) {
+      if (scrollPosition >= singleSetWidth) {
         container.scrollLeft = scrollPosition - singleSetWidth;
       } 
 
-      else if (scrollPosition <= 10) {
+      else if (scrollPosition <= 0) {
         container.scrollLeft = singleSetWidth + scrollPosition;
       }
 
