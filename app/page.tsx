@@ -187,25 +187,25 @@ export default function Home() {
     const container = projectContainerRef.current;
     if (container) {
       const scrollPosition = container.scrollLeft;
-
-      const firstCard = container.firstElementChild;
-      if (!firstCard) return;
-
-      const itemWidth = firstCard.clientWidth + 24; 
       
+      const cards = container.children;
+      if (cards.length < 2) return;
+
+      const itemWidth = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+
       const singleSetWidth = itemWidth * originalProjects.length;
 
-      if (scrollPosition >= singleSetWidth) {
+      if (scrollPosition >= singleSetWidth - 5) {
         container.scrollLeft = scrollPosition - singleSetWidth;
       } 
       else if (scrollPosition <= 0) {
         container.scrollLeft = singleSetWidth + scrollPosition;
       }
 
-      const relativeScroll = container.scrollLeft % singleSetWidth; 
+      // LOGIC TRACKER
+      const rawIndex = Math.round(Math.abs(scrollPosition) / itemWidth);
       
-      const rawIndex = Math.round(relativeScroll / itemWidth);
-      setActiveIndex(Math.min(rawIndex, originalProjects.length - 1));
+      setActiveIndex(rawIndex % originalProjects.length);
     }
   };
 
@@ -615,6 +615,7 @@ export default function Home() {
         <div 
           ref={projectContainerRef}
           onScroll={handleScroll}
+          style={{ scrollBehavior: 'auto' }}
           className="flex overflow-x-auto pb-12 gap-6 no-scrollbar xl:gap-8 px-4 md:px-0 items-center"
         >
           {loopedProjects.map((project, index) => {
@@ -706,15 +707,18 @@ export default function Home() {
               <button
                 key={index}
                 onClick={() => {
-                   // Fitur tambahan: Klik dot untuk scroll ke kartu tsb
-                  if(projectContainerRef.current) {
-                    const cardWidth = projectContainerRef.current.children[0]?.clientWidth || 500;
-                    const targetPos = index * (cardWidth + 24);
-                    projectContainerRef.current.scrollTo({ 
-                      left: targetPos, 
-                      behavior: 'smooth' 
-                    });
-                  }
+                   if(projectContainerRef.current) {
+                      const container = projectContainerRef.current;
+                      const cards = container.children;
+                      if(cards.length > 1) {
+                        const itemWidth = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+
+                        container.scrollTo({ 
+                          left: index * itemWidth, 
+                          behavior: 'smooth' 
+                        });
+                      }
+                   }
                 }}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex ? "bg-white scale-125" : "bg-gray-700 hover:bg-gray-500"
