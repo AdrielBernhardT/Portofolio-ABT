@@ -1,15 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
 import project2 from "./images/project-2.png";
 import project3 from "./images/project-3.png";
+import brownsugar from "./images/camera-brownsugar.jpg";
+import padel from "./images/camera-padel.jpg";
+import lasem from "./images/camera-lasem.png";
+import pelayanan1 from "./images/camera-pelayanan1.jpg";
+import pelayanan2 from "./images/camera-pelayanan2.jpg";
+import batangan from "./images/camera-batangan.png";
+import bali from "./images/camera-bali.png";
+import semarang from "./images/camera-semarang.png";
+import fisher from "./images/camera-fisher.jpg";
 
 export default function Home() {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Programming");
+
+  const projectContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = projectContainerRef.current;
+    if (container) {
+      const handleWheel = (e: WheelEvent) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+        }
+      };
+
+      container.addEventListener("wheel", handleWheel, { passive: false });
+
+      return () => {
+        container.removeEventListener("wheel", handleWheel);
+      };
+    }
+  }, [activeCategory]);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -390,121 +420,230 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="h-auto w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-3 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
-            My <span className="text-blue-500">Projects</span>
+        {/* Header Title */}
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            Projects
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
-          <p className="text-white text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
-            ← Swipe to see projects →
-          </p>
+          
+          {/* CATEGORY TABS */}
+          <div className="flex justify-center gap-8 mb-8">
+            {["Programming", "Photography"].map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`relative pb-2 text-sm md:text-lg tracking-wider transition-all duration-300 ${
+                  activeCategory === category 
+                    ? "text-white font-bold" 
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
+              >
+                {category}
+                {/* Garis Bawah Animasi */}
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform duration-300 ${
+                   activeCategory === category ? "scale-x-100" : "scale-x-0"
+                }`}></span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0">
+        {/* PROJECTS SLIDER CONTAINER */}
+        <div 
+          ref={projectContainerRef}
+          className="flex overflow-x-auto pb-12 gap-6 snap-x snap-proximity no-scrollbar xl:gap-8 px-4 md:px-0 scroll-smooth items-center"
+        >
           {[
+            // --- DATA PROJECT (Programming) ---
             {
+              category: "Programming",
               backgroundImage: project1,
               title: "EduTIA",
-              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We connect graduates directly with corporate partners to secure roles that match their specialties.",
-              tech: ["Next.js", "PostgreSQL", "Prisma"],
+              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce.",
+              tech: ["Next.js", "PostgreSQL"],
               type: "Full Stack",
               githubLink: "https://github.com/leonardo-alexander/EduTIA",
-              notionLink: "https://www.notion.so/...",
+              notionLink: "https://edutia.notion.site/EduTIA-Documentation-2a576c253de880bdadb2ebb8a9436012?pvs=143",
             },
             {
+              category: "Programming",
               backgroundImage: project2,
               title: "PALORANT",
-              desc: "Palorant is a fun mini project inspired by Valorant, designed to showcase character abilities and interactions through an engaging web interface.",
-              tech: ["Figma", "HTML", "CSS", "JavaScript"],
-              type: "UI/UX & Frontend",
+              desc: "Valorant inspired mini-project showcasing character abilities with interactive web interface.",
+              tech: ["HTML", "JS", "CSS"],
+              type: "Frontend",
               githubLink: "https://github.com/AdrielBernhardT/Human-Computer-Interaction/tree/main/Project%20Lab",
               notionLink: "https://www.figma.com/design/CT7GbEhedIFBminRRL9mx4/HCI-Lab-Figma?t=x64y4LJOa5pGRGyA-1",
             },
             {
+              category: "Programming",
               backgroundImage: project3,
               title: "LUMEO",
-              desc: "LUMEO is a digital platform that offers a curated collection of movies, series, and entertainment content. It provides an intuitive interface for smooth browsing and streaming.",
-              tech: ["Figma"],
-              type: "UI/UX & Frontend",
+              desc: "Digital platform for streaming movies and series with intuitive smooth browsing.",
+              tech: ["Figma", "UI/UX"],
+              type: "UI Design",
               githubLink: null,
               notionLink: "https://descriptive-pie-f20.notion.site/Human-Computer-Interaction-29a5a90a0af580ee8d1be73fcd51d9b1",
             },
             {
+              category: "Programming",
               title: "ATAIM",
-              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection to ensure a secure and efficient verification process.",
-              tech: ["Python", "Flask", "Dlib", "YOLOv5"],
-              type: "AI & Full Stack",
-              githubLink: "https://github.com/AdrielBernhardT/...",
+              desc: "Attendance system using camera-based interface and real-time facial recognition.",
+              tech: ["Python", "YOLOv5"],
+              type: "AI & ML",
+              githubLink: "https://github.com/AdrielBernhardT/Artificial-Intelligence/tree/main/ATAIM",
               notionLink: null,
             },
             {
+              category: "Programming",
               title: "FIMA",
-              desc: "FIMA is a comprehensive financial management application designed to streamline personal budgeting and expense tracking through an intuitive interface and real-time analytics.",
+              desc: "Comprehensive financial management to streamline personal budgeting and expense tracking through real-time analytics.",
               tech: ["Figma"],
               type: "UI/UX & Frontend",
               githubLink: null,
               notionLink: "https://descriptive-pie-f20.notion.site/Entrepreneur-Prototyping-2ed5a90a0af580cdb896d87baa22b4e9",
             },
-          ].map((project, index) => (
+
+            // --- DATA PROJECT (Photography) ---
+            {
+              category: "Photography",
+              title: "Brown Sugar Semarang",
+              desc: "Street photography session capturing the vibrant essence of Semarang's urban life.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Street",
+              backgroundImage: brownsugar, 
+            },
+            {
+              category: "Photography",
+              title: "Padel Community",
+              desc: "Sport photography session capturing high intensity moments.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Sport",
+              backgroundImage: padel, 
+            },
+            {
+              category: "Photography",
+              title: "Lasem Heritage",
+              desc: "Exploring the cultural richness of Lasem through vibrant street photography.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Street",
+              backgroundImage: lasem, 
+            },
+            {
+              category: "Photography",
+              title: "Church Serve Photography",
+              desc: "Capturing memorable moments during church events and services.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Serve",
+              backgroundImage: pelayanan2, 
+            },
+            {
+              category: "Photography",
+              title: "Fisher Occupation",
+              desc: "Documenting the daily life and work of fishermen in their natural environment.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "UMKM",
+              backgroundImage: fisher, 
+            },
+            {
+              category: "Photography",
+              title: "Old Town Semarang",
+              desc: "Exploring Semarang's rich heritage through captivating old town photography.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Vintage",
+              backgroundImage: semarang, 
+            },
+            {
+              category: "Photography",
+              title: "Church Ambience Photography",
+              desc: "Capturing memorable moments during church events and services.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Serve",
+              backgroundImage: pelayanan1, 
+            },
+            {
+              category: "Photography",
+              title: "Vitamin Sea",
+              desc: "Beach photography session capturing the essence of seaside relaxation.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Nature",
+              backgroundImage: batangan, 
+            },
+            {
+              category: "Photography",
+              title: "Island of Gods",
+              desc: "Exploring Bali's scenic beauty through captivating island photography.",
+              tech: ["Nikon Z30", "Nikkor 35mm"],
+              type: "Nature",
+              backgroundImage: bali, 
+            },
+          ]
+          // FILTER LOGIC:
+          .filter((item) => item.category === activeCategory)
+          .map((project, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[500px] snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
+              // Card Style diperlebar agar mirip referensi
+              className="shrink-0 relative w-[85vw] sm:w-[500px] md:w-[600px] aspect-video snap-center bg-[#111] rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 group shadow-2xl"
             >
-              {/* Bagian 1: Image */}
-              <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
-                {project.backgroundImage ? (
-                  <Image
-                    src={project.backgroundImage}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-                    <span className="text-gray-700 font-black text-6xl group-hover:text-blue-500/20 transition-colors duration-500">
-                      {project.title.charAt(0)}
-                    </span>
-                  </div>
-                )}
-                
-                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
-                  {project.type}
-                </div>
-              </div>
+              {/* Background Image Full Cover */}
+              {project.backgroundImage ? (
+                <Image
+                  src={project.backgroundImage}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black opacity-80" />
+              )}
 
-              {/* Bagian 2: Content */}
-              <div className="p-6 md:p-8 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">
+              {/* Overlay Content*/}
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 z-10">
+                <span className="text-blue-500 text-xs font-bold tracking-[0.2em] uppercase mb-2">
+                  {project.type}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-lg">
                   {project.title}
                 </h3>
-
-                <p className="text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed">
+                <p className="text-gray-300 text-sm md:text-base max-w-md line-clamp-2 mb-6 drop-shadow-md">
                   {project.desc}
                 </p>
-
-                <div className="flex flex-wrap gap-2 mb-8">
+                
+                {/* Tech Stack Pills */}
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
                   {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[10px] px-3 py-1 bg-gray-950 text-gray-400 rounded-md border border-gray-800 group-hover:border-gray-700 transition"
-                    >
+                    <span key={t} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs text-white">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-gray-800/50">
+                {/* Button Actions Container */}
+                <div className="flex gap-3 mt-2">
+                  {/* Tombol GitHub */}
                   {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    <a 
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2 bg-white text-black font-bold rounded-full text-xs md:text-sm hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                       Code
                     </a>
                   )}
+
                   {project.notionLink && (
-                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <a 
+                      href={project.notionLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2 bg-gray-800/80 backdrop-blur-md text-white border border-gray-600 font-bold rounded-full text-xs md:text-sm hover:bg-white hover:text-black hover:border-white transition-all transform hover:scale-105 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                       Docs
                     </a>
                   )}
@@ -512,6 +651,14 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* DOTS INDICATOR (Visual Only) */}
+        <div className="flex justify-center gap-2 mt-4">
+            <div className="w-2 h-2 rounded-full bg-white"></div>
+            <div className="w-2 h-2 rounded-full bg-gray-700"></div>
+            <div className="w-2 h-2 rounded-full bg-gray-700"></div>
+            <div className="w-2 h-2 rounded-full bg-gray-700"></div>
         </div>
       </section>
 

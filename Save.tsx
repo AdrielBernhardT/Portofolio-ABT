@@ -1,15 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import mainImage from "./images/main-image.png";
 import project1 from "./images/project-1.png";
+import project2 from "./images/project-2.png";
+import project3 from "./images/project-3.png";
 
 export default function Home() {
-  // --- Fungsi untuk Scroll ke Contact ---
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending....");
+    
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("access_key", "06081cd6-7a4b-44eb-a323-d0edfefef440");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Success! Message sent successfully.");
+        (event.target as HTMLFormElement).reset();
+      } else {
+        setResult(data.message);
+      }
+    } catch (error) {
+      setResult("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setResult(""), 5000);
     }
   };
 
@@ -18,125 +54,215 @@ export default function Home() {
       {/* ================= HOME SECTION ================= */}
       <section
         id="home"
-        className="h-screen w-full snap-center flex flex-col md:flex-row items-center justify-center gap-10 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-center flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-6 py-20 lg:py-0 max-w-7xl mx-auto"
       >
-        <div className="space-y-4 text-center md:text-left order-2 md:order-1">
-          <h2 className="text-xl text-blue-500 tracking-widest">
-            HELLO, MY NAME IS
-          </h2>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-none">
-            ADRIEL <br />
-            <span className="text-gray-500 text-2xl md:text-4xl font-bold block mt-2">
-              BERNHARD TANUHARIONO
-            </span>
-          </h1>
-
-          <div className="w-24 h-1 bg-gray-700 my-6 rounded-full mx-auto md:mx-0"></div>
-
-          <p className="max-w-lg text-gray-400 text-lg">
-            Computer Science Student at BINUS Online coloboration with Bank
-            Central Asia as a PPTI Scholarship Awardee. Passionate about{" "}
-            <span className="text-white font-bold">Backend</span> and{" "}
-            <span className="text-white font-bold">Cyber Security</span>.
-          </p>
-
-          <div className="pt-6">
-            {/* BUTTON UPDATE: Menambahkan onClick dan memperbaiki class rounded */}
-            <button
-              onClick={scrollToContact}
-              className="border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300 font-bold"
-            >
-              CONTACT ME
-            </button>
-          </div>
-        </div>
-
-        <div className="relative w-64 h-64 md:w-[400px] md:h-[500px] order-1 md:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden">
+        <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-[400px] lg:w-[450px] lg:h-[550px] order-1 lg:order-2 border-2 border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
           <Image
             src={mainImage}
             alt="Profile Image Adriel"
             fill
-            className="object-cover object-top origin-top scale-125"
+            priority
+            className="object-cover object-top origin-top scale-110 lg:scale-125"
           />
+        </div>
+
+        {/* Text Content */}
+        <div className="space-y-4 text-center lg:text-left order-2 lg:order-1 flex-1">
+          <h2 className="text-sm sm:text-base lg:text-xl text-blue-500 tracking-widest font-semibold">
+            HELLO, MY NAME IS
+          </h2>
+          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+            ADRIEL <br className="hidden sm:block" />
+            <span className="text-gray-500 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold block mt-1 sm:mt-2">
+              BERNHARD TANUHARIONO
+            </span>
+          </h1>
+
+          <div className="w-16 sm:w-24 h-1 bg-gray-700 my-4 sm:my-6 rounded-full mx-auto lg:mx-0"></div>
+
+          <p className="max-w-md sm:max-w-lg mx-auto lg:mx-0 text-gray-400 text-base sm:text-lg leading-relaxed">
+            Computer Science Student at <span className="text-blue-400">BINUS Online</span> collaboration with 
+            <span className="text-blue-400 font-medium"> Bank Central Asia</span> as a PPTI Scholarship Awardee. 
+            Passionate about <span className="text-white font-bold underline decoration-blue-500/50">Backend</span> and 
+            <span className="text-white font-bold underline decoration-blue-500/50"> Cyber Security</span>.
+          </p>
+
+          <div className="pt-4 sm:pt-6">
+            <button
+              onClick={scrollToContact}
+              className="w-full sm:w-auto border-2 border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 font-bold active:scale-95"
+            >
+              CONTACT ME
+            </button>
+          </div>
         </div>
       </section>
 
       {/* ================= ABOUT SECTION ================= */}
       <section
         id="about"
-        className="h-screen w-full snap-center flex flex-col justify-center py-10 px-6 max-w-7xl mx-auto"
+        className="min-h-screen w-full md:snap-center flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold text-white mb-2">
+        {/* Header Section */}
+        <div className="mb-10 lg:mb-16 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             About <span className="text-blue-500">Me</span>
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full"></div>
+          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-gray-400 leading-relaxed text-lg">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="space-y-5 text-gray-400 leading-relaxed text-base md:text-lg order-2 lg:order-1">
             <p>
               Hi! I'm{" "}
               <span className="text-white font-semibold">
                 Adriel Bernhard Tanuhariono
               </span>
-              , a 4th-semester Computer Science student at BINUS Online Learning
-              based in{" "}
-              <span className="text-white">Sentul, West Java, Indonesia</span>.
+              , a 4th-semester Computer Science student at{" "}
+              <span className="text-blue-400">BINUS Online</span> based in{" "}
+              <span className="text-white">Sentul, West Java</span>.
             </p>
             <p>
               I am currently part of the prestigious{" "}
-              <span className="text-white">PPTI BCA Scholarship</span> program.
+              <span className="text-white border-b border-blue-500/30">PPTI BCA Scholarship</span> program.
               My journey in tech is driven by curiosity, specifically in how
               systems work behind the scenes (
-              <span className="text-white">Backend</span>) and how to secure
-              them (<span className="text-white">Cyber Security</span>).
+              <span className="text-white font-medium">Backend</span>) and how to secure
+              them (<span className="text-white font-medium">Cyber Security</span>).
             </p>
             <p>
-              When I'm not coding or exploring Kali Linux, you can find me
-              experimenting with{" "}
-              <span className="text-white">Photography </span>
-              or learning about{" "}
+              When I'm not coding or exploring <span className="italic text-gray-300">Kali Linux</span>, 
+              you can find me experimenting with{" "}
+              <span className="text-white">Photography</span> or learning about{" "}
               <span className="text-white">Machine Learning</span> models.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                04+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Semester
-              </p>
-            </div>
+          {/* Statistics Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6 order-1 lg:order-2">
+            {[
+              { label: "Semester", value: "04+" },
+              { label: "Skills", value: "20+" },
+              { label: "Git Repos", value: "10+" },
+              { label: "Learning", value: "24/7" },
+            ].map((stat, index) => (
+              <div 
+                key={index}
+                className="bg-[#111] p-5 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group flex flex-col justify-center items-center lg:items-start"
+              >
+                <h3 className="text-white text-2xl md:text-4xl font-extrabold mb-1 group-hover:text-blue-500 transition-colors">
+                  {stat.value}
+                </h3>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-[0.2em] font-medium text-center lg:text-left">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                05+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Projects Done
-              </p>
-            </div>
+      {/* ================= TIMELINE SECTION ================= */}
+      <section
+        id="timeline"
+        className="min-h-screen w-full flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+      >
+        <div className="mb-12 md:pl-20"> 
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+            My <span className="text-blue-500">Journey</span>
+          </h2>
+          <div className="w-16 h-1 bg-gray-500 rounded-full"></div>
+        </div>
 
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                20+
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Git Repos
-              </p>
-            </div>
+        <div className="relative">
+          <div className="absolute left-8 top-0 h-full w-0.5 bg-gray-800"></div>
+          <div className="space-y-12">
+            {[
+              {
+                year: "2025 - Present",
+                title: "Full Stack & Projects",
+                place: "Personal & Academic",
+                desc: "Building portfolio projects using Next.js. Deepening knowledge in Cyber Security (Kali Linux) and Machine Learning.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                ),
+              },
+              {
+                year: "2024 - 2026",
+                title: "University & Growth",
+                place: "BINUS Online & PPTI BCA",
+                desc: "Progressing through and focused on Algorithm Programming, Cyber Security, and Machine Learning. Active in exploring new tech stacks like React, Tailwind, and Cyber Tools using Kali Linux.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                ),
+              },
+              {
+                year: "2024",
+                title: "The Beginning",
+                place: "BCA Learning Institute, Sentul City, West Java",
+                desc: "Awarded the PPTI BCA Scholarship, marking the start of my formal education in Computer Science. Joined BINUS Online to pursue my Bachelor's degree.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                ),
+              },
+              {
+                year: "2023",
+                title: "Marketing Intern at Vision Allianz",
+                place: "Pluit, Jakarta and Semarang, Central Java",
+                desc: "Gained valuable professional exposure by assisting in strategic marketing initiatives. Developed strong interpersonal and communication skills while learning how to bridge the gap between business requirements and client needs in a corporate environment.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                ),
+              },
+              {
+                year: "2022-2023",
+                title: "Academic Foundation",
+                place: "BINUS Kemanggisan, Jakarta",
+                desc: "Adopted a rapid-learning mindset to absorb fundamental Computer Science concepts. Focused on mastering the basics of C++, algorithm logic, and computational thinking to build a rock-solid foundation for future software engineering challenges.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                ),
+              },
+              {
+                year: "2022",
+                title: "Winner of National Science Olympiad (OSN-K)",
+                place: "Semarang District, Central Java",
+                desc: "Demonstrated exceptional problem-solving skills by securing a victory at the District Level. Competed against top talent in Competitive Programming and Logic, successfully qualifying for the Provincial Level (OSN-P) in the highly competitive Informatics sector.",
+                icon: (
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                ),
+              },
+            ].map((item, index) => (
+              <div key={index} className="relative flex items-start">
 
-            <div className="bg-[#111] p-6 rounded-xl border border-gray-800 hover:border-blue-500 transition duration-300 group">
-              <h3 className="text-white text-3xl font-bold mb-2 group-hover:scale-105 transition">
-                24/7
-              </h3>
-              <p className="text-sm text-blue-500 uppercase tracking-widest">
-                Learning
-              </p>
-            </div>
+                <div className="absolute left-8 transform -translate-x-1/2 mt-1 w-10 h-10 bg-blue-600 rounded-full border-4 border-[#0a0a0a] z-10 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                    {item.icon}
+                </div>
+
+                <div className="ml-20 w-full">
+                  <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group shadow-lg">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                        <div>
+                            <span className="text-blue-500 text-xs font-bold tracking-widest uppercase mb-1 block">
+                            {item.year}
+                            </span>
+                            <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                            {item.title}
+                            </h3>
+                        </div>
+                        <span className="text-gray-500 text-xs font-semibold uppercase mt-2 md:mt-0 tracking-wider md:text-right">
+                        {item.place}
+                        </span>
+                    </div>
+                    
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -144,16 +270,20 @@ export default function Home() {
       {/* ================= SKILLS SECTION ================= */}
       <section
         id="skills"
-        className="min-h-screen w-full snap-start flex flex-col py-20 px-6 max-w-7xl mx-auto"
+        className="h-screen w-full md:snap-center flex flex-col justify-center py-10 px-6 max-w-7xl mx-auto overflow-hidden"
       >
-        <div className="mb-3 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-white mb-2">
+        <div className="mb-6 text-center md:text-left">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
             My <span className="text-blue-500">Skills</span>
           </h2>
-          <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          <div className="w-12 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          {/* Hint Swipe untuk semua perangkat */}
+          <p className="text-gray-500 text-[10px] mt-4 animate-pulse tracking-widest uppercase">
+            ← Swipe Left/Right to Explore Categories →
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-flow-col grid-rows-2 overflow-x-auto pb-6 gap-4 snap-x snap-mandatory no-scrollbar h-auto max-h-[70vh]">
           {[
             {
               title: "Backend & Languages",
@@ -236,17 +366,17 @@ export default function Home() {
           ].map((category, index) => (
             <div
               key={index}
-              className="bg-[#111] p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group h-full"
+              className="min-w-[280px] md:min-w-[320px] lg:min-w-[380px] snap-start bg-[#0a0a0a] p-4 md:p-6 rounded-xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col shadow-lg"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-blue-500 transition-colors">
+              <h3 className="text-sm md:text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors uppercase tracking-wider">
                 {category.title}
               </h3>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 content-start flex-1">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 bg-gray-900 border border-gray-700 rounded-full text-sm text-gray-300 group-hover:border-blue-500/50 transition"
+                    className="px-2 py-1 bg-gray-900 border border-gray-800 rounded text-[9px] md:text-[11px] text-gray-400 group-hover:text-gray-200 group-hover:border-gray-700 transition-all duration-300 whitespace-nowrap"
                   >
                     {skill}
                   </span>
@@ -260,159 +390,122 @@ export default function Home() {
       {/* ================= PROJECTS SECTION ================= */}
       <section
         id="projects"
-        className="min-h-screen w-full snap-start flex flex-col py-20 px-6 max-w-7xl mx-auto"
+        className="h-auto w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
         <div className="mb-3 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             My <span className="text-blue-500">Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
+          <p className="text-white text-xs mt-4 md:hidden animate-pulse tracking-widest uppercase">
+            ← Swipe to see projects →
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0">
           {[
             {
               backgroundImage: project1,
               title: "EduTIA",
-              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We offer courses specifically designed to meet the demands of the local job market. Beyond training, we connect graduates directly with corporate partners to help them secure roles that match their specialties.",
+              desc: "EduTIA is an online learning platform dedicated to preparing Indonesian youth for the workforce with industry-relevant skills. We connect graduates directly with corporate partners to secure roles that match their specialties.",
               tech: ["Next.js", "PostgreSQL", "Prisma"],
               type: "Full Stack",
               githubLink: "https://github.com/leonardo-alexander/EduTIA",
-              notionLink:
-                "https://www.notion.so/29c76c253de88022b2b6ccb5ee1d453f?v=29c76c253de880308656000cccfa1dbd",
-              demoLink: null,
+              notionLink: "https://edutia.notion.site/EduTIA-Documentation-2a576c253de880bdadb2ebb8a9436012?pvs=143",
+            },
+            {
+              backgroundImage: project2,
+              title: "PALORANT",
+              desc: "Palorant is a fun mini project inspired by Valorant, designed to showcase character abilities and interactions through an engaging web interface.",
+              tech: ["Figma", "HTML", "CSS", "JavaScript"],
+              type: "UI/UX & Frontend",
+              githubLink: "https://github.com/AdrielBernhardT/Human-Computer-Interaction/tree/main/Project%20Lab",
+              notionLink: "https://www.figma.com/design/CT7GbEhedIFBminRRL9mx4/HCI-Lab-Figma?t=x64y4LJOa5pGRGyA-1",
+            },
+            {
+              backgroundImage: project3,
+              title: "LUMEO",
+              desc: "LUMEO is a digital platform that offers a curated collection of movies, series, and entertainment content. It provides an intuitive interface for smooth browsing and streaming.",
+              tech: ["Figma"],
+              type: "UI/UX & Frontend",
+              githubLink: null,
+              notionLink: "https://descriptive-pie-f20.notion.site/Human-Computer-Interaction-29a5a90a0af580ee8d1be73fcd51d9b1",
             },
             {
               title: "ATAIM",
-              desc: "ATAIM is an attendance system that operates entirely through a camera-based interface. It utilizes real-time facial recognition technology to accurately identify and log individuals. Additionally, the system incorporates object detection to ensure a secure and efficient verification process.",
-              tech: ["Jupyter", "Python", "Flask", "Dlib", "YOLOv5"],
-              type: "Full Stack",
-              githubLink:
-                "https://github.com/AdrielBernhardT/Artificial-Intelligence/tree/main/ATAIM",
+              desc: "An attendance system operating entirely through a camera-based interface. Utilizes real-time facial recognition and object detection to ensure a secure and efficient verification process.",
+              tech: ["Python", "Flask", "Dlib", "YOLOv5"],
+              type: "AI & Full Stack",
+              githubLink: "https://github.com/AdrielBernhardT/...",
               notionLink: null,
-              demoLink: null,
+            },
+            {
+              title: "FIMA",
+              desc: "FIMA is a comprehensive financial management application designed to streamline personal budgeting and expense tracking through an intuitive interface and real-time analytics.",
+              tech: ["Figma"],
+              type: "UI/UX & Frontend",
+              githubLink: null,
+              notionLink: "https://descriptive-pie-f20.notion.site/Entrepreneur-Prototyping-2ed5a90a0af580cdb896d87baa22b4e9",
             },
           ].map((project, index) => (
             <div
               key={index}
-              className="bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group flex flex-col overflow-hidden h-auto"
+              className="min-w-[85%] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[500px] snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
             >
-              {/* Bagian 1: Logic Gambar / Placeholder */}
-              <div className="h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
+              {/* Bagian 1: Image */}
+              <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
                 {project.backgroundImage ? (
                   <Image
                     src={project.backgroundImage}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="text-gray-600 font-bold text-4xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+                    <span className="text-gray-700 font-black text-6xl group-hover:text-blue-500/20 transition-colors duration-500">
                       {project.title.charAt(0)}
                     </span>
                   </div>
                 )}
-
-                <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-blue-400 border border-blue-500/30 z-10">
+                
+                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-400 border border-blue-500/30 z-10">
                   {project.type}
                 </div>
               </div>
 
-              {/* Bagian 2: Konten */}
-              <div className="p-6 flex flex-col flex-1">
+              {/* Bagian 2: Content */}
+              <div className="p-6 md:p-8 flex flex-col flex-1">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm mb-6 flex-1 leading-relaxed">
+                <p className="text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed">
                   {project.desc}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-8">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-xs px-3 py-1 bg-gray-900 text-gray-300 rounded-full border border-gray-800"
+                      className="text-[10px] px-3 py-1 bg-gray-950 text-gray-400 rounded-md border border-gray-800 group-hover:border-gray-700 transition"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-800/50">
-                  {/* 1. GitHub Link */}
+                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-gray-800/50">
                   {project.githubLink && (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
-                    >
-                      <svg
-                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span>Code</span>
+                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                      Code
                     </a>
                   )}
-
-                  {/* 2. Notion Link (Docs) */}
                   {project.notionLink && (
-                    <a
-                      href={project.notionLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
-                    >
-                      <svg
-                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        ></path>
-                      </svg>
-                      <span>Docs</span>
-                    </a>
-                  )}
-
-                  {/* 3. Demo Link (Live) */}
-                  {project.demoLink && (
-                    <a
-                      href={project.demoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
-                    >
-                      <svg
-                        className="w-5 h-5 group-hover/link:text-blue-500 transition-colors"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        ></path>
-                      </svg>
-                      <span>Live</span>
+                    <a href={project.notionLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[11px] font-bold text-gray-500 hover:text-white transition-all uppercase tracking-wider">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                      Docs
                     </a>
                   )}
                 </div>
@@ -423,15 +516,12 @@ export default function Home() {
       </section>
 
       {/* ================= CONTACT SECTION ================= */}
-      <section
-        id="contact"
-        className="min-h-screen w-full snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
+      <section 
+        id="contact" 
+        className="min-h-screen w-full md:snap-start flex flex-col justify-center py-20 px-6 max-w-7xl mx-auto"
       >
-        {/* Judul Section */}
-        <div className="mb-5 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-white mb-2">
-            Contact <span className="text-blue-500">Me</span>
-          </h2>
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Contact <span className="text-blue-500">Me</span></h2>
           <div className="w-16 h-1 bg-gray-500 rounded-full mx-auto md:mx-0"></div>
         </div>
 
@@ -470,9 +560,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Mail Me</p>
                   <p className="text-white font-medium group-hover:text-blue-500 transition-colors">
-                    adrielbth01@gmail.com
+                    Mail Me
                   </p>
                 </div>
               </a>
@@ -494,9 +583,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">WhatsApp Me</p>
                   <p className="text-white font-medium group-hover:text-blue-500 transition-colors">
-                    +62 851-5535-3750
+                    WhatsApp Me
                   </p>
                 </div>
               </a>
@@ -559,52 +647,37 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Kolom Kanan: Contact Form (Tampilan Saja) */}
-          <div className="bg-[#111] p-8 rounded-2xl border border-gray-800">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Kolom Kanan: Contact Form*/}
+          <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-gray-800 order-1 lg:order-2">
+            <form onSubmit={onSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Your Name</label>
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  />
+                  <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Name</label>
+                  <input type="text" name="name" required placeholder="Your Name" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Your Email</label>
-                  <input
-                    type="email"
-                    placeholder="john@example.com"
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  />
+                  <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Email</label>
+                  <input type="email" name="email" required placeholder="Your Email" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
               </div>
-
               <div className="space-y-2">
-                <label className="text-sm text-gray-400">Subject</label>
-                <input
-                  type="text"
-                  placeholder="Project Collaboration"
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                />
+                <label className="text-xs text-gray-500 uppercase font-bold tracking-widest">Message</label>
+                <textarea name="message" required rows={4} placeholder="How can I help you?" className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none"></textarea>
               </div>
-
-              <div className="space-y-2">
-                <label className="text-sm text-gray-400">Message</label>
-                <textarea
-                  rows={4}
-                  placeholder="Hi Adriel, I'd like to discuss..."
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-blue-500/20"
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 text-white font-bold py-4 rounded-xl transition-all active:scale-95 shadow-lg shadow-blue-500/20"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Tampilkan Status Pengiriman */}
+              {result && (
+                <p className={`text-center text-sm font-medium mt-4 ${result.includes("Success") ? "text-green-500" : "text-red-500"}`}>
+                  {result}
+                </p>
+              )}
             </form>
           </div>
         </div>
