@@ -148,13 +148,12 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("Programming");
   const [clickedPhotoIndex, setClickedPhotoIndex] = useState<number | null>(null);
   
-  // STATE BARU: Untuk melacak dot mana yang aktif
   const [activeIndex, setActiveIndex] = useState(0);
 
   const projectContainerRef = useRef<HTMLDivElement>(null);
 
-  // Filter Data di luar return supaya bisa dipakai untuk Dots
-  const filteredProjects = ALL_PROJECTS.filter(p => p.category === activeCategory);
+  const originalProjects = ALL_PROJECTS.filter(p => p.category === activeCategory);
+  const loopedProjects = [...originalProjects, ...originalProjects];
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
@@ -183,16 +182,29 @@ export default function Home() {
     }
   }, [activeCategory]);
 
-  // Logic Tracker/Dots bergerak saat di-scroll
   const handleScroll = () => {
     const container = projectContainerRef.current;
     if (container) {
       const scrollPosition = container.scrollLeft;
-      // Asumsi lebar kartu + gap kira-kira 500px - 600px. 
-      // Kita ambil tengah layar container untuk menentukan active index
-      const cardWidth = container.children[0]?.clientWidth || 500;
-      const index = Math.round(scrollPosition / cardWidth);
-      setActiveIndex(index);
+      
+      const totalContentWidth = container.scrollWidth;
+      const singleSetWidth = totalContentWidth / 2;
+
+      if (scrollPosition >= singleSetWidth) {
+        container.scrollLeft = scrollPosition - singleSetWidth;
+      } 
+
+      else if (scrollPosition <= 0) {
+        container.scrollLeft = singleSetWidth + scrollPosition;
+      }
+
+      const firstCard = container.firstElementChild;
+      if (firstCard) {
+        const itemWidth = firstCard.clientWidth + 24;
+        const rawIndex = Math.round(scrollPosition / itemWidth);
+        
+        setActiveIndex(rawIndex % originalProjects.length);
+      }
     }
   };
 
@@ -601,11 +613,10 @@ export default function Home() {
         {/* PROJECTS CONTAINER */}
         <div 
           ref={projectContainerRef}
-          onScroll={handleScroll} // TRIGGER TRACKER SAAT SCROLL
-          // HAPUS CLASS 'snap-center/snap-x/snap-proximity' AGAR SCROLL LICIN
+          onScroll={handleScroll}
           className="flex overflow-x-auto pb-12 gap-6 no-scrollbar xl:gap-8 px-4 md:px-0 scroll-smooth items-center"
         >
-          {filteredProjects.map((project, index) => {
+          {loopedProjects.map((project, index) => {
             const isPhotography = project.category === "Photography";
             const isClicked = clickedPhotoIndex === index;
 
@@ -613,7 +624,6 @@ export default function Home() {
               <div
                 key={index}
                 onClick={() => isPhotography && setClickedPhotoIndex(isClicked ? null : index)}
-                // Hapus 'snap-center' di sini juga
                 className={`shrink-0 relative w-[85vw] sm:w-[500px] md:w-[600px] aspect-video bg-[#111] rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 group shadow-2xl ${
                    isPhotography ? "cursor-pointer" : ""
                 }`}
@@ -691,7 +701,7 @@ export default function Home() {
 
         {/* DYNAMIC DOTS INDICATOR */}
         <div className="flex justify-center flex-wrap gap-2 mt-4 px-10">
-            {filteredProjects.map((_, index) => (
+            {originalProjects.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
