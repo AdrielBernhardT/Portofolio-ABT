@@ -182,28 +182,30 @@ export default function Home() {
     }
   }, [activeCategory]);
 
+  // LOGIC INFINITE SCROLL (TELEPORT) PRESISI TINGGI
   const handleScroll = () => {
     const container = projectContainerRef.current;
     if (container) {
       const scrollPosition = container.scrollLeft;
+
+      const firstCard = container.firstElementChild;
+      if (!firstCard) return;
+
+      const itemWidth = firstCard.clientWidth + 24; 
       
-      const totalContentWidth = container.scrollWidth;
-      const singleSetWidth = totalContentWidth / 2;
+      const singleSetWidth = itemWidth * originalProjects.length;
 
       if (scrollPosition >= singleSetWidth) {
         container.scrollLeft = scrollPosition - singleSetWidth;
       } 
-
       else if (scrollPosition <= 0) {
         container.scrollLeft = singleSetWidth + scrollPosition;
       }
 
-      const firstCard = container.firstElementChild;
-      if (firstCard) {
-        const itemWidth = firstCard.clientWidth + 24;
-        const rawIndex = Math.round(scrollPosition / itemWidth);
-        setActiveIndex(rawIndex % originalProjects.length);
-      }
+      const relativeScroll = container.scrollLeft % singleSetWidth; 
+      
+      const rawIndex = Math.round(relativeScroll / itemWidth);
+      setActiveIndex(Math.min(rawIndex, originalProjects.length - 1));
     }
   };
 
