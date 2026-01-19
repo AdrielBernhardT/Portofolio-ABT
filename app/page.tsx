@@ -298,7 +298,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-2 xl:gap-8 md:overflow-visible md:pb-0">
+        <div className="flex overflow-x-auto pb-10 gap-6 snap-x snap-mandatory no-scrollbar lg:grid-cols-2 xl:gap-8 md:pb-0">
           {[
             {
               backgroundImage: project1,
@@ -345,7 +345,7 @@ export default function Home() {
           ].map((project, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[300px] md:min-w-0 w-full lg:max-w-none snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
+              className="min-w-[85%] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[500px] snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
             >
               {/* Bagian 1: Image */}
               <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
