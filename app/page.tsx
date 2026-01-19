@@ -624,10 +624,10 @@ export default function Home() {
 
             return (
               <div
-                key={index}
+                key={`${index}-${project.title}`}
                 onClick={() => isPhotography && setClickedPhotoIndex(isClicked ? null : index)}
-                className={`shrink-0 relative w-[85vw] sm:w-[500px] md:w-[600px] aspect-video bg-[#111] rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 group shadow-2xl ${
-                   isPhotography ? "cursor-pointer" : ""
+                className={`shrink-0 relative w-[90vw] sm:w-[500px] md:w-[600px] aspect-[4/3] md:aspect-video bg-[#111] rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 group shadow-2xl ${
+                  isPhotography ? "cursor-pointer" : ""
                 }`}
               >
                 {/* Image */}
@@ -646,17 +646,17 @@ export default function Home() {
 
                 {/* Content */}
                 <div 
-                   className={`absolute inset-0 flex flex-col justify-center items-center text-center p-8 z-10 transition-opacity duration-300 ${
-                     isPhotography && !isClicked ? "opacity-0" : "opacity-100"
-                   }`}
+                  className={`absolute inset-0 flex flex-col justify-center items-center text-center p-5 md:p-8 z-10 transition-opacity duration-300 ${
+                    isPhotography && !isClicked ? "opacity-0" : "opacity-100"
+                  }`}
                 >
                   <span className="text-blue-500 text-xs font-bold tracking-[0.2em] uppercase mb-2">
                     {project.type}
                   </span>
-                  <h3 className="text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-lg">
+                  <h3 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4 drop-shadow-lg">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-sm md:text-base max-w-md line-clamp-2 mb-6 drop-shadow-md">
+                  <p className="text-gray-300 text-xs md:text-sm md:text-base max-w-md line-clamp-2 mb-4 md:mb-6 drop-shadow-md">
                     {project.desc}
                   </p>
                   
@@ -702,7 +702,7 @@ export default function Home() {
         </div>
 
         {/* DYNAMIC DOTS INDICATOR */}
-        <div className="flex justify-center flex-wrap gap-2 mt-4 px-10">
+        <div className="flex justify-center flex-wrap gap-2 mt-4 px-4 md:px-10">
             {originalProjects.map((_, index) => (
               <button
                 key={index}
