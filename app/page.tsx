@@ -421,7 +421,7 @@ export default function Home() {
 
         <div 
           ref={projectContainerRef}
-          className="flex overflow-x-auto pb-10 gap-6 snap-x snap-proximit no-scrollbar xl:gap-8 md:pb-0 pr-6 md:pr-20"
+          className="flex overflow-x-auto pb-10 gap-6 snap-x snap-proximity no-scrollbar xl:gap-8 md:pb-0 pr-6 md:pr-20"
         >
           {[
             {
@@ -470,7 +470,7 @@ export default function Home() {
           ].map((project, index) => (
             <div
               key={index}
-              className="min-w-[85%] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[500px] snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
+              className="shrink-0 min-w-[85%] sm:min-w-[400px] md:min-w-[450px] lg:min-w-[500px] snap-center bg-[#111] rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-500 group flex flex-col overflow-hidden h-full shadow-lg"
             >
               {/* Bagian 1: Image */}
               <div className="h-44 sm:h-48 w-full bg-gray-900 flex items-center justify-center relative overflow-hidden">
