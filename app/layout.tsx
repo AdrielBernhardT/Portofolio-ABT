@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // 1. Import Font Google
+import { Inter } from "next/font/google"; 
 import "./globals.css";
 import Navbar from "./components/Navbar";
 
@@ -7,8 +7,12 @@ import Navbar from "./components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portofolio Adriel",
-  description: "Dibuat dengan Next.js",
+  title: "Adriel Bernhard | Backend Developer & Cyber Security",
+  description: "Portfolio of Adriel Bernhard Tanuhariono, a Computer Science student at BINUS Online & PPTI BCA Awardee specializing in Backend Development and Cyber Security.",
+  keywords: ["Adriel Bernhard", "PPTI BCA", "Portfolio Adriel", "PPTI 21", "Adriel Bernhard Tanuhariono"],
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -18,10 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* 3. Masukkan font ke dalam body dengan className={inter.className} */}
       <body className={`${inter.className} bg-black text-white antialiased`}>
         <Navbar />
-        {/* Tambahkan padding top agar konten tidak ketutup Navbar */}
         <main className="max-w-7xl mx-auto px-6 pt-24"> 
             {children}
         </main>
