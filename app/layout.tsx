@@ -10,14 +10,6 @@ export const metadata: Metadata = {
   title: "Adriel Bernhard | Backend Developer & Cyber Security",
   description: "Portfolio of Adriel Bernhard Tanuhariono, a Computer Science student at BINUS Online & PPTI BCA Awardee specializing in Backend Development and Cyber Security.",
   keywords: ["Adriel Bernhard", "PPTI BCA", "Portfolio Adriel", "PPTI 21", "Adriel Bernhard Tanuhariono"],
-  icons: {
-    icon: [
-      {
-        url: "/icon_web.svg",
-        href: "/icon_web.svg",
-      },
-    ],
-  },
 };
 export default function RootLayout({
   children,
