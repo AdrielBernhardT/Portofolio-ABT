@@ -1,11 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   output: "export",
+  basePath: "/Portofolio-ABT",
   images: {
     unoptimized: true,
   },
 
-  basePath: "/Portofolio-ABT",
+  poweredByHeader: false, 
+
+  productionBrowserSourceMaps: false,
+
+  reactStrictMode: true,
 };
 
 export default nextConfig;
