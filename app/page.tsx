@@ -339,7 +339,7 @@ export default function Home() {
             {[
               { label: "Semester", value: "04+" },
               { label: "Skills", value: "20+" },
-              { label: "Git Repos", value: "10+" },
+              { label: "Git Repos", value: "5+" },
               { label: "Learning", value: "24/7" },
             ].map((stat, index) => (
               <div 
